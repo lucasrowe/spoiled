@@ -5,12 +5,14 @@
   "description": "This extension blocks content containing user-specified keywords.",
   "version": "1.0",
 
-  "background" : {
-    "scripts": [
-      "content_script.js"
-    ],
-    "persistent": false
-  },
+  "content_scripts": [
+     {
+       "matches": ["http://*/*", "https://*/*"],
+       "css": ["mystyles.css"],
+       "js": ["content_script.js"],
+       "run_at": "document_end"
+     }
+   ],
 
   "page_action" :
   {
