@@ -8,7 +8,7 @@
   "content_scripts": [
      {
        "matches": ["http://*/*", "https://*/*"],
-       "css": ["style.css"],
+       "css": ["spoiler_style.css"],
        "js": ["content_script.js"],
        "run_at": "document_end"
      }

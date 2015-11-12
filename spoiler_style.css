@@ -1,0 +1,4 @@
+/* This file is for css applied to identified spoiler elements */
+.hidden-spoiler {
+  background-color: red;
+}

@@ -1,9 +1,21 @@
-.hidden-spoiler {
-  background-color: red;
+/* Plugin Popup Style */
+
+body {
+  width: 200px;
+}
+
+.textfield {
+  font-size: 12px;
+  padding: 2px;
+  margin: 5px 5px 5px 0px;
+}
+
+.textfield-label {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .flat-button {
-  margin: 15px;
   padding: 5px;
   font-size: 15px;
   color: white;
@@ -15,4 +27,15 @@
   cursor: pointer;
   -webkit-box-shadow: inset 0 -2px #2a8bcc;
   box-shadow: inset 0 -2px #2a8bcc;
+}
+
+ul {
+  font-size: 14px;
+  list-style-type:none;
+  margin-left: 14px;
+  padding: 0px;
+}
+
+li {
+  padding: 2px;
 }
