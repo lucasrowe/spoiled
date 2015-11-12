@@ -11,10 +11,22 @@ function submitSpoiler(submitButton) {
   }
   // Save it using the Chrome extension storage API.
   var newTerm = document.getElementById('spoiler-textfield').value;
+
+  if (newTerm == "") {
+    return;
+  }
+
   terms.push(newTerm);
   storage.set({'spoilerterms': terms}, function() {
     generateTermsList (terms);
     document.getElementById('spoiler-textfield').value = "";
+  });
+}
+
+function removeAllTerms() {
+  terms = [];
+  storage.set({'spoilerterms': terms}, function() {
+    generateTermsList (terms);
   });
 }
 
@@ -54,6 +66,7 @@ function main() {
     alert("LocalStorage must be enabled for changing options.");
     document.getElementById('spoiler-textfield').disabled = true;
     document.getElementById('submit-btn').disabled = true;
+    document.getElementById('delete-all-btn').disabled = true;
     return;
   }
 }
@@ -62,4 +75,5 @@ document.addEventListener('DOMContentLoaded', function () {
   main();
   getSpoilerTerms ();
   document.querySelector('#submit-btn').addEventListener('click', submitSpoiler);
+  document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
 });

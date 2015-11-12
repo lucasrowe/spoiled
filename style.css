@@ -15,18 +15,28 @@ body {
   font-weight: bold;
 }
 
+.red {
+  background: #db3434;
+  border-bottom: 2px solid #cc2a2a;
+  -webkit-box-shadow: inset 0 -2px #cc2a2a;
+  box-shadow: inset 0 -2px #cc2a2a;
+}
+
+.blue {
+  background: #3498db;
+  border-bottom: 2px solid #2a8bcc;
+  -webkit-box-shadow: inset 0 -2px #2a8bcc;
+  box-shadow: inset 0 -2px #2a8bcc;
+}
+
 .flat-button {
   padding: 5px;
   font-size: 15px;
   color: white;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  background: #3498db;
   border: 0;
-  border-bottom: 2px solid #2a8bcc;
   cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px #2a8bcc;
-  box-shadow: inset 0 -2px #2a8bcc;
 }
 
 ul {
@@ -38,4 +48,12 @@ ul {
 
 li {
   padding: 2px;
+}
+
+#remove-all-section {
+  margin-top: 50px;
+}
+
+#delete-all-btn {
+  margin: 5px;
 }
