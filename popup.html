@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1>Spoiler Spoiler</h1>
+
     <div id="spoiler-strings">
       <h3>Search Terms</h3>
       <div id="spoiler-list-container">
@@ -15,11 +16,18 @@
         </ul>
       </div>
     </div>
-    <div id="add-spoiler-form">
+
+    <!-- THis will get more complicated when new spoiler groups can be managed -->
+
+    <div id="add-spoiler-section">
       <div id="spoiler-entry-field">
-        <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string">
-        <input id="submit-btn" class="flat-button" type="submit" value="Add Spoiler String">
+        <form class="spoiler-form">
+          <label for="spoiler-textfield" class="textfield-label">Add Search Term</label>
+          <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string" placeholder="Enter Term to Search">
+          <input id="submit-btn" class="flat-button" type="submit" value="Add">
+        </form>
       </div>
     </div>
+
   </body>
 </html>
