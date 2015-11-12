@@ -8,6 +8,19 @@
   <body>
     <h1>Spoiler Spoiler</h1>
 
+    <!-- THis will get more complicated when new spoiler groups can be managed -->
+    <div id="add-spoiler-section">
+      <div id="spoiler-entry-field">
+        <form class="spoiler-form">
+          <label for="spoiler-textfield" class="textfield-label">Add Search Term</label>
+          <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string" placeholder="Enter Term to Search">
+          <input id="submit-btn" class="flat-button blue" type="submit" value="Add">
+        </form>
+      </div>
+    </div>
+
+    <!-- All Search Strings will be displayed here -->
+
     <div id="spoiler-strings">
       <h3>Search Terms</h3>
       <div id="spoiler-list-container">
@@ -17,16 +30,13 @@
       </div>
     </div>
 
-    <!-- THis will get more complicated when new spoiler groups can be managed -->
+    <!-- Manage Data Section -->
 
-    <div id="add-spoiler-section">
-      <div id="spoiler-entry-field">
-        <form class="spoiler-form">
-          <label for="spoiler-textfield" class="textfield-label">Add Search Term</label>
-          <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string" placeholder="Enter Term to Search">
-          <input id="submit-btn" class="flat-button" type="submit" value="Add">
+    <div id="remove-all-section">
+        <form class="spoiler-removal-form">
+          <label for="spoiler-textfield" class="textfield-label">Manage Data</label>
+          <input id="delete-all-btn" class="flat-button red" type="submit" value="Delete All Terms">
         </form>
-      </div>
     </div>
 
   </body>
