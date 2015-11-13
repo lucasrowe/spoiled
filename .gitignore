@@ -1,0 +1,8 @@
+# Mac ignore
+.DS_Store
+*.swp
+*.Trashes
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
