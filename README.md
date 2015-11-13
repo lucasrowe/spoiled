@@ -15,6 +15,7 @@ A few more features need to get in this tool before I look into putting it on th
 
 Specifically...
 * Better Twitter and Facebook coverage
+* Block pictures
 * Delete individual terms
 * Sync terms between browsers
 * Prettier blocked content
