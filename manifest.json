@@ -11,7 +11,7 @@
        "matches": ["http://*/*", "https://*/*"],
        "css": ["spoiler_style.css"],
        "js": ["content_script.js"],
-       "run_at": "document_end"
+       "run_at": "document_idle"
      }
    ],
 

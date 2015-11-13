@@ -14,6 +14,9 @@ chrome.storage.local.get(['spoilerterms'], function(result) {
   items.append (document.getElementsByTagName("h4"));
   items.append (document.getElementsByTagName("h5"));
   replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
+
+  items = document.getElementsByTagName("span");
+  replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
 });
 
 function replaceItemsWithMatchingText(items, spoilerTerms, replaceString)
