@@ -20,7 +20,8 @@ function replaceItemsWithMatchingText(items, spoilerTerms, replaceString)
 {
   for (var i = items.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
-      if (items[i].innerHTML.indexOf(spoilerTerms[j]) != -1) {
+      var regex = new RegExp(spoilerTerms[j], "i");
+      if (regex.test (items[i].innerHTML)) {
         items[i].className += " hidden-spoiler";
         items[i].innerHTML = replaceString;
       }
