@@ -4,6 +4,23 @@ body {
   width: 200px;
 }
 
+.page-header {
+  height: 60px;
+  margin: -10px -30px 20px -30px;
+  padding: 15px;
+  padding-left: 40px;
+  display: block;
+  background-color: #3498db;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.50);
+}
+
+.page-icon {
+  position: relative;
+  max-width: 60px;
+  float:left;
+}
+
 .textfield {
   font-size: 12px;
   padding: 2px;
