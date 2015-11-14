@@ -81,6 +81,7 @@ function main() {
 document.addEventListener('DOMContentLoaded', function () {
   main();
   getSpoilerTerms ();
+  document.querySelector('#spoiler-textfield').focus ();
   document.querySelector('#submit-btn').addEventListener('click', submitSpoiler);
   document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
 });
