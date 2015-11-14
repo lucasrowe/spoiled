@@ -1,5 +1,3 @@
-console.log ("POPUP SCRIPT LOADED");
-
 // For now use local but eventually we'll want some syncing
 var storage = chrome.storage.local;
 var terms = [];
@@ -44,6 +42,12 @@ function getSpoilerTerms() {
 }
 
 function generateTermsList(terms) {
+  if (terms.length == 0) {
+    return;
+  } else {
+    document.getElementById ("empty-list").remove();
+  }
+
   var oldList = document.getElementById("spoiler-list");
   if (oldList) {
     oldList.remove();
@@ -58,6 +62,9 @@ function generateTermsList(terms) {
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(terms[i]));
     newList.appendChild(entry);
+
+    var deleteBtn = document.createElement('button');
+    entry.appendChild(deleteBtn);
   }
 }
 
