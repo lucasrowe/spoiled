@@ -100,13 +100,12 @@ function generateListItem (index) {
 function createDeleteButton (index) {
   // Create the button itself
   var deleteBtn = document.createElement('a');
-  deleteBtn.title = "delete term";
-  deleteBtn.className = "flat-button";
+  deleteBtn.title = "Delete";
+  deleteBtn.className = "red delete-btn grey-until-hover";
   deleteBtn.id = index;
 
   // Create our delete button icon
   var deleteIcon = document.createElement('i');
-  deleteIcon.className = "red delete-btn";
   deleteIcon.innerHTML = "X";
   deleteBtn.appendChild(deleteIcon);
 
@@ -119,7 +118,6 @@ function createDeleteButton (index) {
 }
 
 function addTermEnter () {
-  console.log (event.keyCode);
   if (event.keyCode == 13) {
     addTerm ();
   }
