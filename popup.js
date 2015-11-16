@@ -2,7 +2,7 @@
 var storage = chrome.storage.local;
 var terms = [];
 
-function submitSpoiler(submitButton) {
+function addTerm () {
   if (window.localStorage == null) {
     alert('Local storage is required for changing providers');
     return;
@@ -87,19 +87,7 @@ function generateListItem (index) {
     var listItem = document.createElement('li');
 
     // Create our delete button
-    var deleteBtn = document.createElement('a');
-    deleteBtn.title = "delete term";
-    deleteBtn.className = "flat-button";
-    deleteBtn.id = index;
-    // Create our delte button icon
-    var deleteIcon = document.createElement('i');
-    deleteIcon.className = "red delete-btn";
-    deleteIcon.innerHTML = "X";
-    deleteBtn.appendChild(deleteIcon);
-    // Add our removal event
-    deleteBtn.addEventListener('click', function() {
-      removeTerm(deleteBtn);
-    });
+    var deleteBtn = createDeleteButton (index);
     listItem.appendChild(deleteBtn);
 
     // Insert the term into the list
@@ -109,10 +97,31 @@ function generateListItem (index) {
     return listItem;
 }
 
-function submitSpoilerEnter () {
+function createDeleteButton (index) {
+  // Create the button itself
+  var deleteBtn = document.createElement('a');
+  deleteBtn.title = "delete term";
+  deleteBtn.className = "flat-button";
+  deleteBtn.id = index;
+
+  // Create our delete button icon
+  var deleteIcon = document.createElement('i');
+  deleteIcon.className = "red delete-btn";
+  deleteIcon.innerHTML = "X";
+  deleteBtn.appendChild(deleteIcon);
+
+  // Add our removal event
+  deleteBtn.addEventListener('click', function() {
+    removeTerm(deleteBtn);
+  });
+
+  return deleteBtn;
+}
+
+function addTermEnter () {
   console.log (event.keyCode);
   if (event.keyCode == 13) {
-    submitSpoiler ();
+    addTerm ();
   }
 }
 
@@ -120,7 +129,7 @@ function main() {
   if (window.localStorage == null) {
     alert("LocalStorage must be enabled for changing options.");
     document.getElementById('spoiler-textfield').disabled = true;
-    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('add-btn').disabled = true;
     document.getElementById('delete-all-btn').disabled = true;
     return;
   }
@@ -130,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
   main();
   getSpoilerTerms ();
   document.querySelector('#spoiler-textfield').focus ();
-  document.querySelector('#submit-btn').addEventListener('click', submitSpoiler);
-  document.querySelector('#spoiler-textfield').addEventListener("keydown", submitSpoilerEnter);
+  document.querySelector('#add-btn').addEventListener('click', addTerm);
+  document.querySelector('#spoiler-textfield').addEventListener("keydown", addTermEnter);
   document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
 });
