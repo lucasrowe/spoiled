@@ -1,12 +1,13 @@
 /* Plugin Popup Style */
 
 body {
-  width: 200px;
+  width: 250px;
+  margin: 0px;
 }
 
 .page-header {
   height: 60px;
-  margin: -10px -30px 20px -30px;
+  margin: 0px -10px 0px -10px;
   padding: 15px;
   padding-left: 40px;
   display: block;
@@ -75,10 +76,11 @@ li {
   padding: 2px;
 }
 
-#remove-all-section {
-  margin-top: 50px;
-}
-
 #delete-all-btn {
   margin: 5px;
+}
+
+.section {
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
 }
