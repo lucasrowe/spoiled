@@ -48,23 +48,38 @@ function generateTermsList(terms) {
     document.getElementById ("empty-list").remove();
   }
 
+  // Refresh the list if it exists
   var oldList = document.getElementById("spoiler-list");
   if (oldList) {
     oldList.remove();
   }
 
+  // Create a container for our terms list
   var container = document.getElementById("spoiler-list-container");
   var newList = document.createElement('ul');
-  newList.setAttribute ("id", "spoiler-list");
+  newList.id = "spoiler-list";
   container.appendChild (newList);
 
+  // Popuplate our list of terms
   for (var i = 0; i < terms.length; i++) {
-    var entry = document.createElement('li');
-    entry.appendChild(document.createTextNode(terms[i]));
-    newList.appendChild(entry);
+    // Create our list item
+    var listItem = document.createElement('li');
 
-    var deleteBtn = document.createElement('button');
-    entry.appendChild(deleteBtn);
+    // First insert the delete button
+    var deleteBtn = document.createElement('a');
+    deleteBtn.title = "delete term";
+    deleteBtn.className = "flat-button";
+    var deleteIcon = document.createElement('i');
+    deleteIcon.className = "red delete-btn";
+    deleteIcon.innerHTML = "X";
+    deleteBtn.appendChild(deleteIcon);
+    listItem.appendChild(deleteBtn);
+
+    // Insert our term
+    var newTerm = document.createTextNode(terms[i]);
+    listItem.appendChild(newTerm);
+
+    newList.appendChild(listItem);
   }
 }
 

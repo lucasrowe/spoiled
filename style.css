@@ -68,12 +68,16 @@ body {
 ul {
   font-size: 14px;
   list-style-type:none;
-  margin-left: 14px;
   padding: 0px;
 }
 
 li {
   padding: 2px;
+}
+
+.delete-btn {
+  font-size: 10px;
+  padding: 2px 5px 2px 4px;
 }
 
 #delete-all-btn {
