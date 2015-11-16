@@ -34,9 +34,10 @@ body {
 }
 
 .tip {
-  font-size: 12px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
+  color: white;
+  font-size: 14px;
+  background-color: #7DC168;
+  border: 2px solid #478035;
   text-align: center;
   border-radius: 4px;
 }
@@ -50,7 +51,7 @@ body {
 }
 
 .grey {
-  background: #ddd;
+  background: #ccc;
 }
 
 .flat-button {
@@ -83,7 +84,7 @@ li {
 }
 
 .grey-until-hover {
-  background-color: #ddd;
+  background-color: #ccc;
 }
 
 .grey-until-hover:hover {
@@ -92,6 +93,10 @@ li {
 
 #delete-all-btn {
   margin: 5px;
+}
+
+#spoiler-strings {
+  background-color: #f8f8f8;
 }
 
 .section {

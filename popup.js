@@ -62,7 +62,7 @@ function generateTermsList(terms) {
     var emptyDiv = document.createElement ("div");
     emptyDiv.id = "empty-list";
     emptyDiv.className = "tip";
-    emptyDiv.innerHTML = "<p>Add your first term to block in the form above.</p>";
+    emptyDiv.innerHTML = "<p>Add any terms you want to block using the form above.</p>";
     container.appendChild (emptyDiv);
   } else {
     var emptyNode = document.querySelector("#empty-list");
