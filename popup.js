@@ -21,6 +21,14 @@ function submitSpoiler(submitButton) {
   });
 }
 
+function removeTerm (deleteBtn)
+{
+  terms.splice (deleteBtn.id, 1);
+  storage.set({'spoilerterms': terms}, function() {
+    generateTermsList (terms);
+  });
+}
+
 function removeAllTerms() {
   terms = [];
   storage.set({'spoilerterms': terms}, function() {
@@ -36,50 +44,75 @@ function getSpoilerTerms() {
 
       terms = result.spoilerterms;
       generateTermsList (terms);
-
-      console.log (result.spoilerterms);
     });
 }
 
 function generateTermsList(terms) {
-  if (terms.length == 0) {
-    return;
-  } else {
-    document.getElementById ("empty-list").remove();
-  }
-
   // Refresh the list if it exists
   var oldList = document.getElementById("spoiler-list");
   if (oldList) {
     oldList.remove();
   }
 
-  // Create a container for our terms list
+  // Find our container for our terms list
   var container = document.getElementById("spoiler-list-container");
-  var newList = document.createElement('ul');
-  newList.id = "spoiler-list";
-  container.appendChild (newList);
 
-  // Popuplate our list of terms
-  for (var i = 0; i < terms.length; i++) {
+  if (!terms || terms.length == 0) {
+    // If it's empty, just add a placeholder tip for the user
+    var emptyDiv = document.createElement ("div");
+    emptyDiv.id = "empty-list";
+    emptyDiv.className = "tip";
+    emptyDiv.innerHTML = "<p>Add your first term to block in the form above.</p>";
+    container.appendChild (emptyDiv);
+  } else {
+    var emptyNode = document.querySelector("#empty-list");
+    if (emptyNode) {
+      emptyNode.remove();
+    }
+
+    // Start popuplating the list
+    var newList = document.createElement('ul');
+    newList.id = "spoiler-list";
+    container.appendChild (newList);
+
+    // Popuplate our list of terms
+    for(var i=0; i < terms.length; i++){
+      newList.appendChild(generateListItem (i));
+    }
+  }
+}
+
+function generateListItem (index) {
     // Create our list item
     var listItem = document.createElement('li');
 
-    // First insert the delete button
+    // Create our delete button
     var deleteBtn = document.createElement('a');
     deleteBtn.title = "delete term";
     deleteBtn.className = "flat-button";
+    deleteBtn.id = index;
+    // Create our delte button icon
     var deleteIcon = document.createElement('i');
     deleteIcon.className = "red delete-btn";
     deleteIcon.innerHTML = "X";
     deleteBtn.appendChild(deleteIcon);
+    // Add our removal event
+    deleteBtn.addEventListener('click', function() {
+      removeTerm(deleteBtn);
+    });
     listItem.appendChild(deleteBtn);
 
-    // Insert our term
-    var newTerm = document.createTextNode(terms[i]);
+    // Insert the term into the list
+    var newTerm = document.createTextNode(terms[index]);
     listItem.appendChild(newTerm);
 
-    newList.appendChild(listItem);
+    return listItem;
+}
+
+function submitSpoilerEnter () {
+  console.log (event.keyCode);
+  if (event.keyCode == 13) {
+    submitSpoiler ();
   }
 }
 
@@ -98,5 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
   getSpoilerTerms ();
   document.querySelector('#spoiler-textfield').focus ();
   document.querySelector('#submit-btn').addEventListener('click', submitSpoiler);
+  document.querySelector('#spoiler-textfield').addEventListener("keydown", submitSpoilerEnter);
   document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
 });
