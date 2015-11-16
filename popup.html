@@ -14,20 +14,17 @@
     <!-- THis will get more complicated when new spoiler groups can be managed -->
     <div id="add-spoiler-section" class="section">
       <div id="spoiler-entry-field">
-        <form class="spoiler-form">
-          <label for="spoiler-textfield" class="textfield-label">Add Search Term</label>
-          <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string" placeholder="Enter Term to Search">
-          <input id="submit-btn" class="flat-button blue" type="submit" value="Add">
-        </form>
+        <label for="spoiler-textfield" class="textfield-label">Add Search Term</label>
+        <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string" placeholder="Enter Term to Search">
+        <input id="add-btn" class="blue flat-button" type="button" value="Add">
       </div>
     </div>
 
     <!-- All Search Strings will be displayed here -->
 
     <div id="spoiler-strings" class="section">
-      <strong>Search Terms</strong>
+      <h2>Search Terms</h2>
       <div id="spoiler-list-container">
-        <div id="empty-list" class="tip"><p>Add your first term to block in the form above.</p></div>
         <ul id="spoiler-list">
           <!-- Insert spoiler term list here -->
         </ul>
@@ -37,10 +34,10 @@
     <!-- Manage Data Section -->
 
     <div id="remove-all-section" class="section">
-        <form class="spoiler-removal-form">
-          <label for="spoiler-textfield" class="textfield-label">Manage Data</label>
-          <input id="delete-all-btn" class="flat-button red" type="submit" value="Delete All Terms">
-        </form>
+      <form class="spoiler-removal-form">
+        <h2>Manage Data</h2>
+        <input id="delete-all-btn" class="red flat-button" type="submit" value="Delete All Terms">
+      </form>
     </div>
 
   </body>
