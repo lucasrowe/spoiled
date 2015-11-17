@@ -1,4 +1,4 @@
-chrome.storage.local.get(['spoilerterms'], function(result) {
+chrome.storage.sync.get(['spoilerterms'], function(result) {
   if (!result.spoilerterms)
     return;
 

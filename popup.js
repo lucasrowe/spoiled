@@ -3,10 +3,6 @@ var storage = chrome.storage.sync;
 var terms = [];
 
 function addTerm () {
-  if (window.localStorage == null) {
-    alert('Local storage is required for changing providers');
-    return;
-  }
   // Save it using the Chrome extension storage API.
   var newTerm = document.getElementById('spoiler-textfield').value;
 
@@ -16,6 +12,9 @@ function addTerm () {
 
   terms.push(newTerm);
   storage.set({'spoilerterms': terms}, function() {
+    if (chrome.runtime.error) {
+      console.log("Runtime error.");
+    }
     generateTermsList (terms);
     document.getElementById('spoiler-textfield').value = "";
   });
@@ -124,13 +123,6 @@ function addTermEnter () {
 }
 
 function main() {
-  if (window.localStorage == null) {
-    alert("LocalStorage must be enabled for changing options.");
-    document.getElementById('spoiler-textfield').disabled = true;
-    document.getElementById('add-btn').disabled = true;
-    document.getElementById('delete-all-btn').disabled = true;
-    return;
-  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
