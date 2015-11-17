@@ -8,11 +8,7 @@ chrome.storage.local.get(['spoilerterms'], function(result) {
   items = document.getElementsByTagName("a");
   replaceItemsWithMatchingText (items, result.spoilerterms, "[link overridden by Spoiled]");
 
-  items = document.getElementsByTagName("h1");
-  items.append (document.getElementsByTagName("h2"));
-  items.append (document.getElementsByTagName("h3"));
-  items.append (document.getElementsByTagName("h4"));
-  items.append (document.getElementsByTagName("h5"));
+  items = document.querySelectorAll("h1, h2, h3, h4, h5, h6")
   replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
 
   items = document.getElementsByTagName("span");
