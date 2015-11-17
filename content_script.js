@@ -1,21 +1,12 @@
 var cachedTerms = []
-var elementsWithInnerHTMLToSearch = "a, p, h1, h2, h3, h4, h5, h6";
+var elementsWithInnerHTMLToSearch = "a, p, h1, h2, h3, h4, h5, h6, i, em, strong";
 
 chrome.storage.local.get(['spoilerterms'], function(result) {
   if (!result.spoilerterms)
     return;
   cachedTerms = result.spoilerterms;
 
-  var items = document.getElementsByTagName("p");
-  replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
-
-  items = document.getElementsByTagName("a");
-  replaceItemsWithMatchingText (items, result.spoilerterms, "[link overridden by Spoiled]");
-
-  items = document.querySelectorAll("h1, h2, h3, h4, h5, h6")
-  replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
-
-  items = document.getElementsByTagName("span");
+  items = document.querySelectorAll(elementsWithInnerHTMLToSearch)
   replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
 });
 
