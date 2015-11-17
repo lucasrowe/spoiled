@@ -2,9 +2,9 @@
   "manifest_version": 2,
 
   "name": "Spoiled",
-  "description": "This extension blocks content using any provided keywords.
+  "description": "Blocks spoiler content using any provided keywords.
   Stop spoilers, sports, or celebrity click-bait from ruining your interwebs.",
-  "version": "1.0",
+  "version": "0.7.0",
 
   "content_scripts": [
      {

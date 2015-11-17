@@ -2,7 +2,7 @@ var cachedTerms = []
 var elementsWithInnerHTMLToSearch = "a, p, h1, h2, h3, h4, h5, h6, i, em, strong";
 var containerElements = "span, div, li, th, td, dt, dd";
 
-chrome.storage.local.get(['spoilerterms'], function(result) {
+chrome.storage.sync.get(['spoilerterms'], function(result) {
   if (!result.spoilerterms)
     return;
   cachedTerms = result.spoilerterms;
