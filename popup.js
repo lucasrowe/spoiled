@@ -1,5 +1,5 @@
 // For now use local but eventually we'll want some syncing
-var storage = chrome.storage.local;
+var storage = chrome.storage.sync;
 var terms = [];
 
 function addTerm () {
