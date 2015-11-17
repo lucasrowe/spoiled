@@ -10,6 +10,7 @@ A few more features need to get in this tool before I look into putting it on th
 * [x] Better Twitter and Facebook coverage
 * [x] Delete individual terms
 * [x] Sync terms between browsers
+* [ ] Image and video blocking
 * [ ] Prettier blocked content
 
 ## Contribute
