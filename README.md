@@ -7,7 +7,7 @@ Clone this repository and then follow [Google's Instructions](https://developer.
 
 A few more features need to get in this tool before I look into putting it on the Chrome store.
 
-* [ ] Better Twitter and Facebook coverage
+* [x] Better Twitter and Facebook coverage
 * [x] Delete individual terms
 * [ ] Sync terms between browsers
 * [ ] Prettier blocked content
