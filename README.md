@@ -1,4 +1,4 @@
-# <img src="./icon.png" alt="egg-icon"/> Spoiled
+# <img src="spoiled-chrome-extension/icon.png" alt="egg-icon"/> Spoiled
 
 A Chrome extension that blocks content using any provided keywords. Stop spoilers, sports, or celebrity click-bait from ruining your interwebs.
 
