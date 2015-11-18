@@ -7,6 +7,10 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
     return;
   cachedTerms = result.spoilerterms;
 
+  // Find any images
+  items = document.querySelectorAll('img');
+  applyBlurCSSToMatchingImages (items, result.spoilerterms);
+
   // Search innerHTML elements first
   items = document.querySelectorAll(elementsWithInnerHTMLToSearch)
   replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
@@ -23,7 +27,6 @@ function replaceItemsWithMatchingText(items, spoilerTerms, replaceString) {
     for (var j = 0; j < spoilerTerms.length; j++) {
       var regex = new RegExp(spoilerTerms[j], "i");
       if (regex.test (items[i].innerHTML)) {
-        console.log ("replaced: " + items[i].innerHTML);
         items[i].className += " hidden-spoiler";
         items[i].innerHTML = replaceString;
       }
@@ -40,6 +43,18 @@ function findContainersWithTextInside (target) {
     }
   }
   return emptyNodes;
+}
+
+function applyBlurCSSToMatchingImages(items, spoilerTerms) {
+  for (var i = 0; i < items.length; i++) {
+    for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
+      var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
+      if (regex.test (items[i].title) || regex.test (items[i].alt ||
+      regex.test (items[i].src) || regex.test (items[i].name))) {
+        items[i].className += " blurred";
+      }
+    }
+  }
 }
 
 // Detecting changed content using Mutation Observers
