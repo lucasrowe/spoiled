@@ -1,5 +1,5 @@
 var cachedTerms = []
-var elementsWithInnerHTMLToSearch = "a, p, h1, h2, h3, h4, h5, h6, i, em, strong";
+var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6, i, em, strong";
 var containerElements = "span, div, li, th, td, dt, dd";
 
 chrome.storage.sync.get(['spoilerterms'], function(result) {
@@ -8,28 +8,28 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
   cachedTerms = result.spoilerterms;
 
   // Search innerHTML elements first
-  items = document.querySelectorAll(elementsWithInnerHTMLToSearch)
-  replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
+  nodes = document.querySelectorAll(elementsWithTextContentToSearch)
+  replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
 
   // Now find any container elements that have just text inside them
-  items = findContainersWithTextInside (document);
-  if (items && items.length != 0) {
-    replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
+  nodes = findContainersWithTextInside (document);
+  if (nodes && nodes.length != 0) {
+    replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
   }
 
   // Find any images
-  items = document.querySelectorAll('img');
-  applyBlurCSSToMatchingImages (items, result.spoilerterms);
+  nodes = document.querySelectorAll('img');
+  applyBlurCSSToMatchingImages (nodes, result.spoilerterms);
 
 });
 
-function replaceItemsWithMatchingText(items, spoilerTerms, replaceString) {
-  for (var i = items.length; i--;) {
+function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
+  for (var i = nodes.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
-      if (compareForSpoiler (items[i], spoilerTerms[j])) {
-        items[i].className += " hidden-spoiler";
-        items[i].textContent = replaceString;
-        blurAnyChildrenImages(items[i]);
+      if (compareForSpoiler (nodes[i], spoilerTerms[j])) {
+        nodes[i].className += " hidden-spoiler";
+        nodes[i].textContent = replaceString;
+        blurNearestChildrenImages(nodes[i]);
       }
     }
   }
@@ -40,10 +40,22 @@ function compareForSpoiler (nodeToCheck, spoilerTerm) {
   return regex.test (nodeToCheck.textContent);
 }
 
-function blurAnyChildrenImages (nodeToCheck) {
-  // Go up three levels and make sure there are no images nearby
-  // This number could potentially be tied to a config for aggressiveness
-  var childImages = nodeToCheck.parentNode.parentNode.parentNode.querySelectorAll('img')
+function blurNearestChildrenImages (nodeToCheck) {
+  // Traverse up a level and look for images, keep going until either
+  // an image is found or the top of the DOM is reached.
+  // This has a known side effect of blurring ALL images on the page
+  // if an early spoiler is found, but ideally will catch the nearest images
+  var nextParent = nodeToCheck;
+  var childImages;
+  var maxIterations = 5;
+  var iterationCount = 0;
+  do {
+    nextParent = nextParent.parentNode;
+    childImages = nextParent.parentNode.querySelectorAll('img');
+    iterationCount++;
+  } while (nextParent && childImages.length == 0 && iterationCount < maxIterations)
+
+  // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
     for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
       childImages[imageIndex].className += " blurred";
@@ -52,8 +64,8 @@ function blurAnyChildrenImages (nodeToCheck) {
   }
 }
 
-function findContainersWithTextInside (target) {
-  var containerNodes = target.querySelectorAll(containerElements);
+function findContainersWithTextInside (targetNode) {
+  var containerNodes = targetNode.querySelectorAll(containerElements);
   var emptyNodes = [];
   for (var i = 0; i < containerNodes.length; i++) {
     var containerChildren = containerNodes[i].childNodes;
@@ -66,14 +78,14 @@ function findContainersWithTextInside (target) {
   return emptyNodes;
 }
 
-function applyBlurCSSToMatchingImages(items, spoilerTerms) {
-  for (var i = 0; i < items.length; i++) {
+function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
+  for (var i = 0; i < nodes.length; i++) {
     for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
       var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
-      if (regex.test (items[i].title) || regex.test (items[i].alt ||
-      regex.test (items[i].src) || regex.test (items[i].name))) {
-        items[i].className += " blurred";
-        items[i].parentNode.style.overflow = "hidden";
+      if (regex.test (nodes[i].title) || regex.test (nodes[i].alt ||
+      regex.test (nodes[i].src) || regex.test (nodes[i].name))) {
+        nodes[i].className += " blurred";
+        nodes[i].parentNode.style.overflow = "hidden";
       }
     }
   }
@@ -89,11 +101,11 @@ var observer = new MutationObserver(function(mutations, observer) {
     // fired when a mutation occurs
     // console.log(mutations, observer);
     for (var i = 0; i < mutations.length; i++) {
-      var newNodes = mutations[i].target.querySelectorAll (elementsWithInnerHTMLToSearch);
-      replaceItemsWithMatchingText (newNodes, cachedTerms, "[text overridden by Spoiled]");
+      var newNodes = mutations[i].target.querySelectorAll (elementsWithTextContentToSearch);
+      replacenodesWithMatchingText (newNodes, cachedTerms, "[text overridden by Spoiled]");
 
       newNodes = findContainersWithTextInside (mutations[i].target);
-      replaceItemsWithMatchingText (newNodes, cachedTerms, "[text overridden by Spoiled]");
+      replacenodesWithMatchingText (newNodes, cachedTerms, "[text overridden by Spoiled]");
     }
 });
 
