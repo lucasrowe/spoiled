@@ -16,17 +16,38 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
   if (items && items.length != 0) {
     replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
   }
+
+  // Find any images
+  items = document.querySelectorAll('img');
+  applyBlurCSSToMatchingImages (items, result.spoilerterms);
+
 });
 
 function replaceItemsWithMatchingText(items, spoilerTerms, replaceString) {
   for (var i = items.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
-      var regex = new RegExp(spoilerTerms[j], "i");
-      if (regex.test (items[i].innerHTML)) {
-        console.log ("replaced: " + items[i].innerHTML);
+      if (compareForSpoiler (items[i], spoilerTerms[j])) {
         items[i].className += " hidden-spoiler";
-        items[i].innerHTML = replaceString;
+        items[i].textContent = replaceString;
+        blurAnyChildrenImages(items[i]);
       }
+    }
+  }
+}
+
+function compareForSpoiler (nodeToCheck, spoilerTerm) {
+  var regex = new RegExp(spoilerTerm, "i");
+  return regex.test (nodeToCheck.textContent);
+}
+
+function blurAnyChildrenImages (nodeToCheck) {
+  // Go up three levels and make sure there are no images nearby
+  // This number could potentially be tied to a config for aggressiveness
+  var childImages = nodeToCheck.parentNode.parentNode.parentNode.querySelectorAll('img')
+  if (childImages && childImages.length > 0) {
+    for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
+      childImages[imageIndex].className += " blurred";
+      childImages[imageIndex].parentNode.style.overflow = "hidden";
     }
   }
 }
@@ -35,11 +56,27 @@ function findContainersWithTextInside (target) {
   var containerNodes = target.querySelectorAll(containerElements);
   var emptyNodes = [];
   for (var i = 0; i < containerNodes.length; i++) {
-    if (containerNodes[i].childNodes.length == 0 || containerNodes[i].childNodes[0].nodeType == 3) {
-      emptyNodes.push(containerNodes[i]);
+    var containerChildren = containerNodes[i].childNodes;
+    for (var childIndex = 0; childIndex < containerChildren.length; childIndex++) {
+      if (containerChildren[childIndex].textContent) {
+        emptyNodes.push(containerChildren[childIndex]);
+      }
     }
   }
   return emptyNodes;
+}
+
+function applyBlurCSSToMatchingImages(items, spoilerTerms) {
+  for (var i = 0; i < items.length; i++) {
+    for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
+      var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
+      if (regex.test (items[i].title) || regex.test (items[i].alt ||
+      regex.test (items[i].src) || regex.test (items[i].name))) {
+        items[i].className += " blurred";
+        items[i].parentNode.style.overflow = "hidden";
+      }
+    }
+  }
 }
 
 // Detecting changed content using Mutation Observers

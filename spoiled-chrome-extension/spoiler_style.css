@@ -2,3 +2,9 @@
 .hidden-spoiler {
   background-color: red;
 }
+
+.blurred {
+  filter: blur(20px);
+  -webkit-filter: blur(20px);
+  margin: 0px;
+}

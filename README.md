@@ -10,8 +10,17 @@ A few more features need to get in this tool before I look into putting it on th
 * [x] Better Twitter and Facebook coverage
 * [x] Delete individual terms
 * [x] Sync terms between browsers
-* [ ] Image and video blocking
+* [x] Image blocking
 * [ ] Prettier blocked content
+* [ ] Tooltip on Search Terms section
+
+## Roadmap
+
+#### Planned Features
+* [ ] Video blocking
+* [ ] Counter of each word
+
+See the issues list for wishlist and other enhancements.
 
 ## Contribute
 I'd love help from any other spoiler haters out there. This is my first Chrome extension and my javascript skills are in a constant state of staleness.
