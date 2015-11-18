@@ -26,9 +26,9 @@ function replaceItemsWithMatchingText(items, spoilerTerms, replaceString) {
   for (var i = items.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
       var regex = new RegExp(spoilerTerms[j], "i");
-      if (regex.test (items[i].innerHTML)) {
+      if (regex.test (items[i].textContent)) {
         items[i].className += " hidden-spoiler";
-        items[i].innerHTML = replaceString;
+        items[i].textContent = replaceString;
       }
     }
   }
@@ -38,8 +38,11 @@ function findContainersWithTextInside (target) {
   var containerNodes = target.querySelectorAll(containerElements);
   var emptyNodes = [];
   for (var i = 0; i < containerNodes.length; i++) {
-    if (containerNodes[i].childNodes.length == 0 || containerNodes[i].childNodes[0].nodeType == 3) {
-      emptyNodes.push(containerNodes[i]);
+    var containerChildren = containerNodes[i].childNodes;
+    for (var childIndex = 0; childIndex < containerChildren.length; childIndex++) {
+      if (containerChildren[childIndex].textContent) {
+        emptyNodes.push(containerChildren[childIndex]);
+      }
     }
   }
   return emptyNodes;
