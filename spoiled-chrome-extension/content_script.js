@@ -43,17 +43,17 @@ function compareForSpoiler (nodeToCheck, spoilerTerm) {
 function blurNearestChildrenImages (nodeToCheck) {
   // Traverse up a level and look for images, keep going until either
   // an image is found or the top of the DOM is reached.
-  // This has a known side effect of blurring ANY image on the page
-  // if a spoiler is found, but ideally will catch the nearest images
-  var nextParent = nodeToCheck.parentNode;
-  var childImages = nextParent.parentNode.querySelectorAll('img');
+  // This has a known side effect of blurring ALL images on the page
+  // if an early spoiler is found, but ideally will catch the nearest images
+  var nextParent = nodeToCheck;
+  var childImages;
   var maxIterations = 5;
   var iterationCount = 0;
-  while (nextParent && childImages.length == 0 && iterationCount < maxIterations) {
-    iterationCount++;
+  do {
     nextParent = nextParent.parentNode;
     childImages = nextParent.parentNode.querySelectorAll('img');
-  }
+    iterationCount++;
+  } while (nextParent && childImages.length == 0 && iterationCount < maxIterations)
 
   // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
