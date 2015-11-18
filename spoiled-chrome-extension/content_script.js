@@ -29,7 +29,7 @@ function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
       if (compareForSpoiler (nodes[i], spoilerTerms[j])) {
         nodes[i].className += " hidden-spoiler";
         nodes[i].textContent = replaceString;
-        blurAnyChildrenImages(nodes[i]);
+        blurNearestChildrenImages(nodes[i]);
       }
     }
   }
@@ -40,10 +40,22 @@ function compareForSpoiler (nodeToCheck, spoilerTerm) {
   return regex.test (nodeToCheck.textContent);
 }
 
-function blurAnyChildrenImages (nodeToCheck) {
-  // Go up three levels and make sure there are no images nearby
-  // This number could potentially be tied to a config for aggressiveness
-  var childImages = nodeToCheck.parentNode.parentNode.parentNode.querySelectorAll('img')
+function blurNearestChildrenImages (nodeToCheck) {
+  // Traverse up a level and look for images, keep going until either
+  // an image is found or the top of the DOM is reached.
+  // This has a known side effect of blurring ANY image on the page
+  // if a spoiler is found, but ideally will catch the nearest images
+  var nextParent = nodeToCheck.parentNode;
+  var childImages = nextParent.parentNode.querySelectorAll('img');
+  var maxIterations = 5;
+  var iterationCount = 0;
+  while (nextParent && childImages.length == 0 && iterationCount < maxIterations) {
+    iterationCount++;
+    nextParent = nextParent.parentNode;
+    childImages = nextParent.parentNode.querySelectorAll('img');
+  }
+
+  // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
     for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
       childImages[imageIndex].className += " blurred";
