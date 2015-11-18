@@ -47,6 +47,7 @@ function blurAnyChildrenImages (nodeToCheck) {
   if (childImages && childImages.length > 0) {
     for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
       childImages[imageIndex].className += " blurred";
+      childImages[imageIndex].parentNode.style.overflow = "hidden";
     }
   }
 }
@@ -72,6 +73,7 @@ function applyBlurCSSToMatchingImages(items, spoilerTerms) {
       if (regex.test (items[i].title) || regex.test (items[i].alt ||
       regex.test (items[i].src) || regex.test (items[i].name))) {
         items[i].className += " blurred";
+        items[i].parentNode.style.overflow = "hidden";
       }
     }
   }
