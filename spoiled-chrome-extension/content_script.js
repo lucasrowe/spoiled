@@ -7,10 +7,6 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
     return;
   cachedTerms = result.spoilerterms;
 
-  // Find any images
-  items = document.querySelectorAll('img');
-  applyBlurCSSToMatchingImages (items, result.spoilerterms);
-
   // Search innerHTML elements first
   items = document.querySelectorAll(elementsWithInnerHTMLToSearch)
   replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
@@ -20,16 +16,37 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
   if (items && items.length != 0) {
     replaceItemsWithMatchingText (items, result.spoilerterms, "[text overridden by Spoiled]");
   }
+
+  // Find any images
+  items = document.querySelectorAll('img');
+  applyBlurCSSToMatchingImages (items, result.spoilerterms);
+
 });
 
 function replaceItemsWithMatchingText(items, spoilerTerms, replaceString) {
   for (var i = items.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
-      var regex = new RegExp(spoilerTerms[j], "i");
-      if (regex.test (items[i].textContent)) {
+      if (compareForSpoiler (items[i], spoilerTerms[j])) {
         items[i].className += " hidden-spoiler";
         items[i].textContent = replaceString;
+        blurAnyChildrenImages(items[i]);
       }
+    }
+  }
+}
+
+function compareForSpoiler (nodeToCheck, spoilerTerm) {
+  var regex = new RegExp(spoilerTerm, "i");
+  return regex.test (nodeToCheck.textContent);
+}
+
+function blurAnyChildrenImages (nodeToCheck) {
+  // Go up three levels and make sure there are no images nearby
+  // This number could potentially be tied to a config for aggressiveness
+  var childImages = nodeToCheck.parentNode.parentNode.parentNode.querySelectorAll('img')
+  if (childImages && childImages.length > 0) {
+    for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
+      childImages[imageIndex].className += " blurred";
     }
   }
 }
