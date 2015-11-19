@@ -1,0 +1,157 @@
+/* Plugin Popup Style */
+
+// Brand Colors
+// These were chosen using Google's guide for material design
+// http://www.google.com/design/spec/style/color.html#color-color-palette
+// ---------------------------------------------------------
+
+@red: #F44336;
+@red-lighter: #FF8A80;
+@red-darker: #D50000;
+@blue: #03A9F4;
+@blue-lighter: #80D8FF;
+@blue-darker: #0091EA;
+@green: #8BC34A;
+@green-lighter: #C5E1A5;
+@green-darker: #7CB342;
+@grey: #ECEFF1;
+@grey-lighter: #FAFAFA;
+@grey-darker: #CFD8DC;
+
+// Typography
+// ---------------------------------------------------------
+
+
+
+body {
+  width: 250px;
+  margin: 0px;
+}
+
+.page-header {
+  height: 60px;
+  margin: 0px -10px 0px -10px;
+  padding: 15px;
+  padding-left: 40px;
+  display: block;
+  background-color: @blue-darker;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.50);
+}
+
+.page-icon {
+  position: relative;
+  max-width: 60px;
+  float:left;
+}
+
+.textfield {
+  font-size: 12px;
+  padding: 2px;
+  margin: 5px 5px 5px 0px;
+}
+
+.textfield-label {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.tip {
+  color: white;
+  font-size: 14px;
+  background-color: @green;
+  border: 2px solid @green-darker;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.grey {
+  background: #ccc;
+}
+
+.flat-button {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  height: 2.25rem;
+  line-height: 2;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 150ms;
+}
+
+.flat-button:hover {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+.red-button {
+  background: @red;
+}
+
+.red-button:hover {
+  background: @red-lighter;
+  border-color: @red-darker;
+  box-shadow: 0px 0px 0px 3px #edabab;
+}
+
+.blue-button {
+  background: @blue;
+}
+
+.blue-button:hover {
+  background: @blue-lighter;
+  border-color: @blue-darker;
+  box-shadow: 0px 0px 0px 3px #a1d7fb;
+}
+
+ul {
+  font-size: 14px;
+  list-style-type:none;
+  padding: 0px;
+}
+
+li {
+  padding: 2px;
+  margin: 2px;
+}
+
+.delete-btn {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px 2px 4px;
+  color: white;
+  margin-right: 5px;
+}
+
+.grey-until-hover {
+  background-color: #ccc;
+}
+
+.grey-until-hover:hover {
+  background-color: #db3434;
+}
+
+#delete-all-btn {
+  margin: 5px;
+}
+
+#spoiler-strings {
+  background-color: #f8f8f8;
+  padding-bottom: 25px;
+}
+
+.section {
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+}
