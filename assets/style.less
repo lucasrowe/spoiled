@@ -1,4 +1,4 @@
-/* Plugin Popup Style */
+@import url(https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed);
 
 // Brand Colors
 // These were chosen using Google's guide for material design
@@ -19,13 +19,45 @@
 @grey-darker: #CFD8DC;
 
 // Typography
+// The fonts in this project are owned by Google, licensed
+// under the Creative Common Attribution 4.0 International License
+// http://google.github.io/material-design-icons/
 // ---------------------------------------------------------
 
+// Fonts -----
+.text-heading {
+}
+.text-caption {
+  color: rgba(0, 0, 0, 0.8);
+}
+.text-button {
+  text-transform: uppercase;
+}
 
+
+// Icons -----
+
+// Rules for sizing the icon.
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+// ---------------------------------------------------------
 
 body {
   width: 250px;
   margin: 0px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .page-header {
@@ -100,9 +132,8 @@ body {
 }
 
 .red-button:hover {
-  background: @red-lighter;
-  border-color: @red-darker;
-  box-shadow: 0px 0px 0px 3px #edabab;
+  background: lighten(@red, 2%);
+  box-shadow: 0 0 3px rgba(0,0,0,.1),0 3px 3px rgba(0,0,0,.3);
 }
 
 .green-button {
@@ -110,9 +141,8 @@ body {
 }
 
 .green-button:hover {
-  background: @green-lighter;
-  border-color: @green-lighter;
-  box-shadow: 0px 0px 0px 3px @blue-lighter;
+  background: lighten(@green, 2%);
+  box-shadow: 0 0 3px rgba(0,0,0,.1),0 3px 3px rgba(0,0,0,.3);
 }
 
 ul {
@@ -124,6 +154,11 @@ ul {
 li {
   padding: 2px;
   margin: 2px;
+  border: 1px solid lightgrey;
+}
+
+.search-term {
+  vertical-align: super;
 }
 
 .delete-btn {
@@ -135,11 +170,11 @@ li {
 }
 
 .grey-until-hover {
-  background-color: #ccc;
+  color: @grey-darker;
 }
 
 .grey-until-hover:hover {
-  background-color: #db3434;
+  color: @red;
 }
 
 #delete-all-btn {
@@ -148,10 +183,10 @@ li {
 
 #spoiler-strings {
   background-color: #f8f8f8;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 
 .section {
   border-bottom: 1px solid lightgrey;
-  padding: 10px;
+  padding: 8px;
 }

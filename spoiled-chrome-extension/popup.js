@@ -90,7 +90,9 @@ function generateListItem (index) {
     listItem.appendChild(deleteBtn);
 
     // Insert the term into the list
-    var newTerm = document.createTextNode(terms[index]);
+    var newTerm = document.createElement('span');
+    newTerm.className = " search-term";
+    newTerm.innerHTML = terms[index];
     listItem.appendChild(newTerm);
 
     return listItem;
@@ -105,7 +107,8 @@ function createDeleteButton (index) {
 
   // Create our delete button icon
   var deleteIcon = document.createElement('i');
-  deleteIcon.innerHTML = "X";
+  deleteIcon.className = "material-icons md-inactive md-24";
+  deleteIcon.innerHTML = "remove_circle";
   deleteBtn.appendChild(deleteIcon);
 
   // Add our removal event
