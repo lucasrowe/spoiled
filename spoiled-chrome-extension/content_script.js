@@ -9,12 +9,12 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
 
   // Search innerHTML elements first
   nodes = document.querySelectorAll(elementsWithTextContentToSearch)
-  replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
+  replacenodesWithMatchingText (nodes, result.spoilerterms, "[text replaced by Spoiled]");
 
   // Now find any container elements that have just text inside them
   nodes = findContainersWithTextInside (document);
   if (nodes && nodes.length != 0) {
-    replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
+    replacenodesWithMatchingText (nodes, result.spoilerterms, "[text replaced by Spoiled]");
   }
 });
 
@@ -53,8 +53,7 @@ function blurNearestChildrenImages (nodeToCheck) {
   // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
     for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
-      childImages[imageIndex].className += " blurred";
-      childImages[imageIndex].parentNode.style.overflow = "hidden";
+      childImages[imageIndex].className += " blacked-out";
     }
   }
 }
