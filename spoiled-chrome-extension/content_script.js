@@ -1,5 +1,5 @@
 var cachedTerms = []
-var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6, i, em, strong";
+var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
 var containerElements = "span, div, li, th, td, dt, dd";
 
 chrome.storage.sync.get(['spoilerterms'], function(result) {
@@ -9,18 +9,13 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
 
   // Search innerHTML elements first
   nodes = document.querySelectorAll(elementsWithTextContentToSearch)
-  replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
+  replacenodesWithMatchingText (nodes, result.spoilerterms, "[text replaced by Spoiled]");
 
   // Now find any container elements that have just text inside them
   nodes = findContainersWithTextInside (document);
   if (nodes && nodes.length != 0) {
-    replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
+    replacenodesWithMatchingText (nodes, result.spoilerterms, "[text replaced by Spoiled]");
   }
-
-  // Find any images
-  nodes = document.querySelectorAll('img');
-  applyBlurCSSToMatchingImages (nodes, result.spoilerterms);
-
 });
 
 function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
@@ -58,8 +53,7 @@ function blurNearestChildrenImages (nodeToCheck) {
   // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
     for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
-      childImages[imageIndex].className += " blurred";
-      childImages[imageIndex].parentNode.style.overflow = "hidden";
+      childImages[imageIndex].className += " blacked-out";
     }
   }
 }
@@ -71,7 +65,7 @@ function findContainersWithTextInside (targetNode) {
     var containerChildren = containerNodes[i].childNodes;
     for (var childIndex = 0; childIndex < containerChildren.length; childIndex++) {
       if (containerChildren[childIndex].textContent) {
-        emptyNodes.push(containerChildren[childIndex]);
+        emptyNodes.push(containerChildren[childIndex].parentNode);
       }
     }
   }
