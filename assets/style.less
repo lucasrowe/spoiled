@@ -1,0 +1,220 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed);
+
+// Brand Colors
+// These were chosen using Google's guide for material design
+// http://www.google.com/design/spec/style/color.html#color-color-palette
+// ---------------------------------------------------------
+
+@red: #F44336;
+@red-lighter: #FF8A80;
+@red-darker: #D50000;
+@blue: #03A9F4;
+@blue-lighter: #80D8FF;
+@blue-darker: #0091EA;
+@green: #8BC34A;
+@green-lighter: #C5E1A5;
+@green-darker: #7CB342;
+@grey: #ECEFF1;
+@grey-lighter: #FAFAFA;
+@grey-darker: #CFD8DC;
+
+// Typography
+// The fonts in this project are owned by Google, licensed
+// under the Creative Common Attribution 4.0 International License
+// http://google.github.io/material-design-icons/
+// ---------------------------------------------------------
+
+// Fonts -----
+.text-heading {
+}
+.text-caption {
+  color: rgba(0, 0, 0, 0.8);
+}
+.text-button {
+  text-transform: uppercase;
+}
+
+@white-transparent: rgba(255, 255, 255, 0.6);
+@black-transparent: rgba(0, 0, 0, 0.8);
+
+
+// Icons -----
+
+// Rules for sizing the icon.
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+// ---------------------------------------------------------
+// Animations
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+// ---------------------------------------------------------
+
+body {
+  width: 250px;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.page-header {
+  height: 60px;
+  margin: 0px -10px 0px -10px;
+  padding: 15px;
+  padding-left: 40px;
+  display: block;
+  background-color: @blue-darker;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.50);
+}
+
+.page-icon {
+  position: relative;
+  max-width: 60px;
+  float:left;
+}
+
+.textfield {
+  font-size: 12px;
+  height: 32px;
+  width: 140px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
+  background-color: @grey-lighter;
+  border: 1px solid @grey-darker;
+  border-radius: 4px;
+}
+
+.textfield-label {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.tip {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  background-color: @blue;
+  border: 2px solid @blue-darker;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.grey {
+  background: #ccc;
+}
+
+.flat-button {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  height: 2.25rem;
+  line-height: 2;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 150ms;
+}
+
+.flat-button:hover {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+.red-button {
+  background: @red;
+}
+
+.red-button:hover {
+  background-color: darken(@red-lighter, 20%);
+  border-color: @red;
+  box-shadow: 0px 0px 0px 3px @red-lighter;
+}
+
+.green-button {
+  background: @green;
+}
+
+.green-button:hover {
+  background-color: darken(@green-lighter, 20%);
+  border-color: @green;
+  box-shadow: 0px 0px 0px 3px @green-lighter;
+}
+
+.green-button:disabled {
+  background-color: @grey;
+  border-color: @grey-darker;
+  color: @grey-darker;
+  cursor: default;
+}
+.green-button:disabled:hover {
+  box-shadow: 0px 0px 0px 0px @green-lighter;
+}
+
+ul {
+  font-size: 14px;
+  list-style-type:none;
+  padding: 0px;
+}
+
+li {
+  margin: 2px;
+  padding-top: 5px;
+  border: 1px solid lightgrey;
+}
+
+.search-term {
+  vertical-align: 45%;
+}
+
+.delete-btn {
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.grey-until-hover {
+  color: @grey-darker;
+}
+
+.grey-until-hover:hover {
+  color: @red;
+}
+
+#delete-all-btn {
+  margin: 5px;
+}
+
+#spoiler-strings {
+  background-color: #f8f8f8;
+  padding-bottom: 20px;
+}
+
+.section {
+  border-bottom: 1px solid lightgrey;
+  padding: 8px;
+}
