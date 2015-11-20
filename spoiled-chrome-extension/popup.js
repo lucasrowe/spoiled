@@ -109,7 +109,7 @@ function createDeleteButton (index) {
   // Create our delete button icon
   var deleteIcon = document.createElement('i');
   deleteIcon.className = "material-icons md-inactive md-24";
-  deleteIcon.innerHTML = "remove_circle";
+  deleteIcon.innerHTML = "highlight_off";
   deleteBtn.appendChild(deleteIcon);
 
   // Add our removal event

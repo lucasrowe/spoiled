@@ -55,6 +55,14 @@
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 // ---------------------------------------------------------
+// Animations
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+// ---------------------------------------------------------
 
 body {
   width: 250px;
@@ -175,18 +183,17 @@ ul {
 
 li {
   margin: 2px;
+  padding-top: 5px;
   border: 1px solid lightgrey;
 }
 
 .search-term {
-  vertical-align: super;
+  vertical-align: 45%;
 }
 
 .delete-btn {
   cursor: pointer;
-  font-size: 14px;
-  padding: 2px 4px 2px 4px;
-  color: white;
+  margin-left: 5px;
   margin-right: 5px;
 }
 
