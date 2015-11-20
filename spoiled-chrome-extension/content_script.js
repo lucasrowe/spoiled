@@ -16,11 +16,6 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
   if (nodes && nodes.length != 0) {
     replacenodesWithMatchingText (nodes, result.spoilerterms, "[text overridden by Spoiled]");
   }
-
-  // Find any images
-  nodes = document.querySelectorAll('img');
-  applyBlurCSSToMatchingImages (nodes, result.spoilerterms);
-
 });
 
 function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
@@ -71,7 +66,7 @@ function findContainersWithTextInside (targetNode) {
     var containerChildren = containerNodes[i].childNodes;
     for (var childIndex = 0; childIndex < containerChildren.length; childIndex++) {
       if (containerChildren[childIndex].textContent) {
-        emptyNodes.push(containerChildren[childIndex]);
+        emptyNodes.push(containerChildren[childIndex].parentNode);
       }
     }
   }
