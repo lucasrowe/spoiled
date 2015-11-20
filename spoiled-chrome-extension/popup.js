@@ -9,6 +9,7 @@ function addTerm () {
   if (newTerm == "") {
     return;
   }
+  document.querySelector('#add-btn').disabled = true;
 
   terms.push(newTerm);
   storage.set({'spoilerterms': terms}, function() {
@@ -123,6 +124,11 @@ function addTermEnter () {
   if (event.keyCode == 13) {
     addTerm ();
   }
+  if (document.querySelector('#spoiler-textfield').value.length == 0) {
+    document.querySelector('#add-btn').disabled = true;
+  } else {
+    document.querySelector('#add-btn').disabled = false;
+  }
 }
 
 function main() {
@@ -133,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
   getSpoilerTerms ();
   document.querySelector('#spoiler-textfield').focus ();
   document.querySelector('#add-btn').addEventListener('click', addTerm);
-  document.querySelector('#spoiler-textfield').addEventListener("keydown", addTermEnter);
+  document.querySelector('#add-btn').disabled = true;
+  document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermEnter);
   document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
 });

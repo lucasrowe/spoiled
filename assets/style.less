@@ -34,6 +34,9 @@
   text-transform: uppercase;
 }
 
+@white-transparent: rgba(255, 255, 255, 0.6);
+@black-transparent: rgba(0, 0, 0, 0.8);
+
 
 // Icons -----
 
@@ -79,8 +82,15 @@ body {
 
 .textfield {
   font-size: 12px;
-  padding: 2px;
-  margin: 5px 5px 5px 0px;
+  height: 32px;
+  width: 140px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
+  background-color: @grey-lighter;
+  border: 1px solid @grey-darker;
+  border-radius: 4px;
 }
 
 .textfield-label {
@@ -132,8 +142,9 @@ body {
 }
 
 .red-button:hover {
-  background: lighten(@red, 2%);
-  box-shadow: 0 0 3px rgba(0,0,0,.1),0 3px 3px rgba(0,0,0,.3);
+  background-color: darken(@red-lighter, 20%);
+  border-color: @red;
+  box-shadow: 0px 0px 0px 3px @red-lighter;
 }
 
 .green-button {
@@ -141,8 +152,19 @@ body {
 }
 
 .green-button:hover {
-  background: lighten(@green, 2%);
-  box-shadow: 0 0 3px rgba(0,0,0,.1),0 3px 3px rgba(0,0,0,.3);
+  background-color: darken(@green-lighter, 20%);
+  border-color: @green;
+  box-shadow: 0px 0px 0px 3px @green-lighter;
+}
+
+.green-button:disabled {
+  background-color: @grey;
+  border-color: @grey-darker;
+  color: @grey-darker;
+  cursor: default;
+}
+.green-button:disabled:hover {
+  box-shadow: 0px 0px 0px 0px @green-lighter;
 }
 
 ul {
@@ -152,7 +174,6 @@ ul {
 }
 
 li {
-  padding: 2px;
   margin: 2px;
   border: 1px solid lightgrey;
 }
