@@ -12,7 +12,7 @@ A few more features need to get in this tool before I look into putting it on th
 * [x] Delete individual terms
 * [x] Sync terms between browsers
 * [x] Image blocking
-* [ ] Prettier blocked content
+* [x] Prettier blocked content
 * [ ] Tooltip on Search Terms section
 * [ ] Smarter insertion of search - Twitter takes way too long to trigger
 
