@@ -1,5 +1,5 @@
 var cachedTerms = []
-var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6, i, em, strong";
+var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
 var containerElements = "span, div, li, th, td, dt, dd";
 
 chrome.storage.sync.get(['spoilerterms'], function(result) {
