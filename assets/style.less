@@ -56,11 +56,28 @@
 
 // ---------------------------------------------------------
 // Animations
-
 @keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
+  from {opacity:0;}
+  to {opacity:1;}
 }
+
+.fade {
+  -webkit-transition: opacity 1s ease-in;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 0;
+}
+
+// ---------------------------------------------------------
+// Variables
+
+@popup-width: 250px;
+@banner-height: 60px;
 
 // ---------------------------------------------------------
 
@@ -72,7 +89,7 @@ body {
 }
 
 .page-header {
-  height: 60px;
+  height: @banner-height;
   margin: 0px -10px 0px -10px;
   padding: 15px;
   padding-left: 40px;
@@ -175,13 +192,13 @@ body {
   box-shadow: 0px 0px 0px 0px @green-lighter;
 }
 
-ul {
+.spoiler-list {
   font-size: 14px;
   list-style-type:none;
   padding: 0px;
 }
 
-li {
+.spoiler-item {
   margin: 2px;
   padding-top: 5px;
   border: 1px solid lightgrey;
@@ -190,6 +207,8 @@ li {
 .search-term {
   vertical-align: 45%;
 }
+
+// ---- Delete and Help Icon Buttons
 
 .delete-btn {
   cursor: pointer;
@@ -204,6 +223,45 @@ li {
 .grey-until-hover:hover {
   color: @red;
 }
+
+.help-icon {
+  cursor: pointer;
+  float: right;
+}
+
+// ----- Help Popover Style
+
+.popover {
+	position: absolute;
+  display: none;
+	width: @popup-width - 40px;
+	background-color: @grey-lighter;
+  padding: 10px;
+  padding-top: -15px;
+  margin-left: 10px;
+  margin-top: @banner-height;
+  border-radius: 6px;
+
+  li {
+    margin-top: 8px;
+    margin-left: -15px;
+  }
+}
+
+.modal-background {
+  position: absolute;
+  display: none;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+  float: left;
+  margin-top: 0px;
+  height: 100%;
+  width: 100%;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+// ----
 
 #delete-all-btn {
   margin: 5px;
