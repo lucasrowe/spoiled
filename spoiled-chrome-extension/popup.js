@@ -5,7 +5,8 @@ var terms = [];
 function addTerm () {
   // Save it using the Chrome extension storage API.
   var newTerm = document.getElementById('spoiler-textfield').value;
-
+  document.getElementById('spoiler-textfield').value = "";
+  
   if (newTerm == "") {
     return;
   }
@@ -17,7 +18,6 @@ function addTerm () {
       console.log("Runtime error.");
     }
     generateTermsList (terms);
-    document.getElementById('spoiler-textfield').value = "";
   });
 }
 
@@ -73,6 +73,7 @@ function generateTermsList(terms) {
     // Start popuplating the list
     var newList = document.createElement('ul');
     newList.id = "spoiler-list";
+    newList.className = "spoiler-list";
     container.appendChild (newList);
 
     // Popuplate our list of terms in reverse order so people see their word added
@@ -85,6 +86,7 @@ function generateTermsList(terms) {
 function generateListItem (index) {
     // Create our list item
     var listItem = document.createElement('li');
+    listItem.className = "spoiler-item";
 
     // Create our delete button
     var deleteBtn = createDeleteButton (index);
@@ -131,6 +133,18 @@ function addTermEnter () {
   }
 }
 
+// SHOW POP-OVER
+function showPopOver() {
+	document.getElementById("help-popover").style.display = "block";
+  document.getElementById("help-popover-background").style.display = "block";
+}
+
+// CLOSE POP-OVER
+function closePopOver(divID) {
+	document.getElementById("help-popover").style.display = "none";
+  document.getElementById("help-popover-background").style.display = "none";
+}
+
 function main() {
 }
 
@@ -142,4 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#add-btn').disabled = true;
   document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermEnter);
   document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
+  document.querySelector('#help-icon').addEventListener('click', showPopOver);
+  document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
 });
