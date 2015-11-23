@@ -9,7 +9,7 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
   blockSpoilerContent (document, result.spoilerterms, "[text replaced by Spoiled]");
 });
 
-function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
+function blockSpoilerContent (rootNode, spoilerTerms, blockText) {
   // Search innerHTML elements first
   var nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch)
   replacenodesWithMatchingText (nodes, spoilerTerms, blockText);
@@ -21,7 +21,7 @@ function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
   }
 }
 
-function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
+function replacenodesWithMatchingText (nodes, spoilerTerms, replaceString) {
   for (var i = nodes.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
       if (compareForSpoiler (nodes[i], spoilerTerms[j])) {
@@ -75,7 +75,7 @@ function findContainersWithTextInside (targetNode) {
   return emptyNodes;
 }
 
-function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
+function applyBlurCSSToMatchingImages (nodes, spoilerTerms) {
   for (var i = 0; i < nodes.length; i++) {
     for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
       var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
@@ -104,9 +104,7 @@ var observer = new MutationObserver(function(mutations, observer) {
 
 // configuration of the observer:
 var config = { attributes: true, subtree: true }
-
 // turn on the observer...unfortunately we target the entire document
 observer.observe(document, config);
-
 // disconnecting likely won't work since we need to continuously watch
 // observer.disconnect();
