@@ -34,7 +34,7 @@
   text-transform: uppercase;
 }
 
-@white-transparent: rgba(255, 255, 255, 0.6);
+@white-transparent: rgba(255, 255, 255, 0.85);
 @black-transparent: rgba(0, 0, 0, 0.8);
 
 
@@ -235,12 +235,13 @@ body {
 	position: absolute;
   display: none;
 	width: @popup-width - 40px;
-	background-color: @grey-lighter;
+	background-color: @grey;
   padding: 10px;
   padding-top: -15px;
   margin-left: 10px;
-  margin-top: @banner-height;
+  margin-top: @banner-height - 20px;
   border-radius: 6px;
+  color: @black-transparent;
 
   li {
     margin-top: 8px;
@@ -252,7 +253,7 @@ body {
   position: absolute;
   display: none;
   top: 0px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
   float: left;
   margin-top: 0px;
   height: 100%;
