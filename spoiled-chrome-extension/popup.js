@@ -75,8 +75,8 @@ function generateTermsList(terms) {
     newList.id = "spoiler-list";
     container.appendChild (newList);
 
-    // Popuplate our list of terms
-    for(var i=0; i < terms.length; i++){
+    // Popuplate our list of terms in reverse order so people see their word added
+    for(var i=terms.length-1; i >= 0; i--){
       newList.appendChild(generateListItem (i));
     }
   }
