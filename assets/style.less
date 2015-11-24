@@ -16,7 +16,7 @@
 @green-darker: #7CB342;
 @grey: #ECEFF1;
 @grey-lighter: #FAFAFA;
-@grey-darker: #CFD8DC;
+@grey-darker: #afb5b9;
 
 // Typography
 // The fonts in this project are owned by Google, licensed
@@ -88,10 +88,19 @@ body {
   color: rgba(0, 0, 0, 0.7);
 }
 
+a {
+  text-decoration: none;
+  color: @green-darker;
+}
+a:hover {
+  color: @green-lighter;
+}
+
 .page-header {
+  font-size: 15px;
   height: @banner-height;
   margin: 0px -10px 0px -10px;
-  padding: 15px;
+  padding: 20px;
   padding-left: 40px;
   display: block;
   background-color: @blue-darker;
@@ -222,6 +231,10 @@ body {
 }
 
 .grey-until-hover:hover {
+  color: @blue;
+}
+
+.hover-red:hover {
   color: @red;
 }
 
@@ -245,7 +258,6 @@ body {
   color: @black-transparent;
 
   li {
-    margin-top: 8px;
     margin-left: -15px;
   }
 }
@@ -277,4 +289,23 @@ body {
 .section {
   border-bottom: 1px solid lightgrey;
   padding: 8px;
+}
+
+// ---- footer
+
+.footer {
+  padding: 5px;
+  text-align: right;
+  a {
+    padding: 8px;
+  }
+}
+
+.link-with-icon {
+  margin-bottom: 8px;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
 }

@@ -6,7 +6,7 @@ function addTerm () {
   // Save it using the Chrome extension storage API.
   var newTerm = document.getElementById('spoiler-textfield').value;
   document.getElementById('spoiler-textfield').value = "";
-  
+
   if (newTerm == "") {
     return;
   }
@@ -105,7 +105,7 @@ function createDeleteButton (index) {
   // Create the button itself
   var deleteBtn = document.createElement('a');
   deleteBtn.title = "Delete";
-  deleteBtn.className = "red delete-btn grey-until-hover";
+  deleteBtn.className = "red delete-btn grey-until-hover hover-red";
   deleteBtn.id = index;
 
   // Create our delete button icon
