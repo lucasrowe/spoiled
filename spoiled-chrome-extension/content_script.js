@@ -6,19 +6,22 @@ chrome.storage.sync.get(['spoilerterms'], function(result) {
   if (!result.spoilerterms)
     return;
   cachedTerms = result.spoilerterms;
-
-  // Search innerHTML elements first
-  nodes = document.querySelectorAll(elementsWithTextContentToSearch)
-  replacenodesWithMatchingText (nodes, result.spoilerterms, "[text replaced by Spoiled]");
-
-  // Now find any container elements that have just text inside them
-  nodes = findContainersWithTextInside (document);
-  if (nodes && nodes.length != 0) {
-    replacenodesWithMatchingText (nodes, result.spoilerterms, "[text replaced by Spoiled]");
-  }
+  blockSpoilerContent (document, result.spoilerterms, "[text replaced by Spoiled]");
 });
 
-function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
+function blockSpoilerContent (rootNode, spoilerTerms, blockText) {
+  // Search innerHTML elements first
+  var nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch)
+  replacenodesWithMatchingText (nodes, spoilerTerms, blockText);
+
+  // Now find any container elements that have just text inside them
+  nodes = findContainersWithTextInside (rootNode);
+  if (nodes && nodes.length != 0) {
+    replacenodesWithMatchingText (nodes, spoilerTerms, blockText);
+  }
+}
+
+function replacenodesWithMatchingText (nodes, spoilerTerms, replaceString) {
   for (var i = nodes.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
       if (compareForSpoiler (nodes[i], spoilerTerms[j])) {
@@ -72,7 +75,7 @@ function findContainersWithTextInside (targetNode) {
   return emptyNodes;
 }
 
-function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
+function applyBlurCSSToMatchingImages (nodes, spoilerTerms) {
   for (var i = 0; i < nodes.length; i++) {
     for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
       var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
@@ -95,19 +98,13 @@ var observer = new MutationObserver(function(mutations, observer) {
     // fired when a mutation occurs
     // console.log(mutations, observer);
     for (var i = 0; i < mutations.length; i++) {
-      var newNodes = mutations[i].target.querySelectorAll (elementsWithTextContentToSearch);
-      replacenodesWithMatchingText (newNodes, cachedTerms, "[text overridden by Spoiled]");
-
-      newNodes = findContainersWithTextInside (mutations[i].target);
-      replacenodesWithMatchingText (newNodes, cachedTerms, "[text overridden by Spoiled]");
+      blockSpoilerContent(mutations[i].target, cachedTerms, "[text overridden by Spoiled]");
     }
 });
 
 // configuration of the observer:
 var config = { attributes: true, subtree: true }
-
 // turn on the observer...unfortunately we target the entire document
 observer.observe(document, config);
-
 // disconnecting likely won't work since we need to continuously watch
 // observer.disconnect();
