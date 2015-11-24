@@ -13,7 +13,7 @@ A few more features need to get in this tool before I look into putting it on th
 * [x] Sync terms between browsers
 * [x] Image blocking
 * [x] Prettier blocked content
-* [ ] Tooltip on Blocked Phrases section
+* [x] Tooltip on Blocked Phrases section
 * [ ] Smarter insertion of search - Twitter takes way too long to trigger
 
 ## Source Code
