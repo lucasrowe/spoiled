@@ -45,7 +45,7 @@ function blurNearestChildrenImages (nodeToCheck) {
   // if an early spoiler is found, but ideally will catch the nearest images
   var nextParent = nodeToCheck;
   var childImages;
-  var maxIterations = 5;
+  var maxIterations = 3;
   var iterationCount = 0;
   do {
     nextParent = nextParent.parentNode;
