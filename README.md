@@ -3,41 +3,11 @@
 A Chrome extension that blocks content using any provided keywords.
 Stop spoilers, sports, or celebrity click-bait from ruining your interwebs.
 
-## To Install
-Clone this repository and then follow [Google's Instructions](https://developer.chrome.com/extensions/getstarted#unpacked). Make sure to load the folder called spoiled-chrome-extension.
+# To Install
 
-A few more features need to get in this tool before I look into putting it on the Chrome store.
+This can be installed from the [Chrome Web Store](https://chrome.google.com/webstore/detail/spoiled/ofgoaiodajmkpocgdkjlokhhbpeodnci) just like any other plugin. To make changes to the source code of the plugin, follow the instructions below.
 
-* [x] Better Twitter and Facebook coverage
-* [x] Delete individual terms
-* [x] Sync terms between browsers
-* [x] Image blocking
-* [x] Prettier blocked content
-* [x] Tooltip on Blocked Phrases section
-* [ ] Smarter insertion of search - Twitter takes way too long to trigger
-
-## Source Code
-
-### Dependency - Less
-
-Less is used to simplify the CSS creation and has the added value of minifying
-the stylesheet. The less stylesheet is not stored with the plugin, instead,
-
-    assets/style.less
-
-    compiles to spoiled-chrome-extension/style.css
-
-To make changes to the style, make sure to edit the .less file.
-
-## Roadmap
-
-#### Planned Features
-* [ ] Video blocking
-* [ ] Counter of each word
-
-See the issues list for wishlist and other enhancements.
-
-## Contribute
+# Contribute
 I'd love help from any other spoiler haters out there. This is my first Chrome extension and my javascript skills are in a constant state of staleness.
 
 **Let's make this thing...**
@@ -50,3 +20,22 @@ I'd love help from any other spoiler haters out there. This is my first Chrome e
 * Social logins
 * User data collection
 * Slow and heavy-handed
+
+## Download Source Code
+
+#### Instructions for beginning development
+1. Download this repository.
+2. Follow [Chrome's documentation](https://developer.chrome.com/extensions/getstarted) for getting started developing extensions.
+3. Plugin content is inside the **_spoiled-chrome-extension_** folder. That's the folder that you can load under **_chrome://extensions**.
+4. Style and branding content is in the **_assets_** folder -- [Less](http://lesscss.org/) is used for CSS pre-processing.
+
+#### Dependency - Less
+
+Less is used to simplify the CSS creation and has the added value of minifying
+the stylesheet. The less stylesheet is not stored with the plugin, instead,
+
+    assets/style.less
+
+    compiles to spoiled-chrome-extension/style.css
+
+To make changes to the style, make sure to edit the .less file.
