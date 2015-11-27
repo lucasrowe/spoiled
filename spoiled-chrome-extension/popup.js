@@ -137,12 +137,14 @@ function addTermEnter () {
 function showPopOver() {
 	document.getElementById("help-popover").style.display = "block";
   document.getElementById("help-popover-background").style.display = "block";
+  document.querySelector(".onoffContainer").style.display = "none";
 }
 
 // CLOSE POP-OVER
 function closePopOver(divID) {
 	document.getElementById("help-popover").style.display = "none";
   document.getElementById("help-popover-background").style.display = "none";
+  document.querySelector(".onoffContainer").style.display = "block";
 }
 
 function main() {

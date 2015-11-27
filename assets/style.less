@@ -295,6 +295,55 @@ a:hover {
   padding: 8px;
 }
 
+// On Off
+// At a point of laziness I grabbed this code from https://proto.io/freebies/onoff/
+
+.onoffContainer {
+  position: relative;
+}
+.onoffswitch {
+    position: absolute;
+    top: 17px;
+    right: 5px;
+    width: 60px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+    border: 0px solid #FFFFFF; border-radius: 30px;
+    background-color: #9E9E9E;
+    padding-left: 6px;
+    color: @white-transparent;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 30px; margin: -5px;
+    background: @grey-darker;
+    position: absolute; top: 0; bottom: 0;
+    right: 40px;
+    border-radius: 30px;
+//    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: lighten(@blue, 10%);
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: lighten(@blue, 10%);
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px;
+    background-color: @blue;
+//    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+}
+
 // ---- footer
 
 .footer {
