@@ -2,9 +2,17 @@ var cachedTerms = []
 var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
 var containerElements = "span, div, li, th, td, dt, dd";
 
-chrome.storage.sync.get(['spoilerterms'], function(result) {
-  if (!result.spoilerterms)
+chrome.storage.sync.get(null, function(result) {
+  // Don't do anything if blocking is diabled
+  if (!result.isOn) {
     return;
+  }
+  if (!result.spoilerterms) {
+    return;
+  }
+
+  enableMutationObserver ();
+
   cachedTerms = result.spoilerterms;
   blockSpoilerContent (document, result.spoilerterms, "[text replaced by Spoiled]");
 });
@@ -88,23 +96,25 @@ function applyBlurCSSToMatchingImages (nodes, spoilerTerms) {
   }
 }
 
-// Detecting changed content using Mutation Observers
-//
-// https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver?redirectlocale=en-US&redirectslug=DOM%2FMutationObserver
-// https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
-MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+function enableMutationObserver () {
+  // Detecting changed content using Mutation Observers
+  //
+  // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver?redirectlocale=en-US&redirectslug=DOM%2FMutationObserver
+  // https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-var observer = new MutationObserver(function(mutations, observer) {
-    // fired when a mutation occurs
-    // console.log(mutations, observer);
-    for (var i = 0; i < mutations.length; i++) {
-      blockSpoilerContent(mutations[i].target, cachedTerms, "[text overridden by Spoiled]");
-    }
-});
+  var observer = new MutationObserver(function(mutations, observer) {
+      // fired when a mutation occurs
+      // console.log(mutations, observer);
+      for (var i = 0; i < mutations.length; i++) {
+        blockSpoilerContent(mutations[i].target, cachedTerms, "[text overridden by Spoiled]");
+      }
+  });
 
-// configuration of the observer:
-var config = { attributes: true, subtree: true }
-// turn on the observer...unfortunately we target the entire document
-observer.observe(document, config);
-// disconnecting likely won't work since we need to continuously watch
-// observer.disconnect();
+  // configuration of the observer:
+  var config = { attributes: true, subtree: true }
+  // turn on the observer...unfortunately we target the entire document
+  observer.observe(document, config);
+  // disconnecting likely won't work since we need to continuously watch
+  // observer.disconnect();
+}

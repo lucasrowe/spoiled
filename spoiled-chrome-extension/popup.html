@@ -44,18 +44,29 @@
     <!-- All Search Strings will be displayed here -->
 
     <div id="spoiler-strings" class="section">
+      <div class="onoffContainer fade fadeIn">
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch">
+            <label class="onoffswitch-label" for="onoffswitch">ON</label>
+        </div>
+      </div>
       <h2>Blocked Phrases</h2>
-      <div clss="two-neighbors">
+      <!-- Tip is hidden unless Blocking is off -->
+      <div id="blockingOffTip" class="tip fade fadeIn" style="display: none">
+        <span><i class="material-icons md-24 icon">warning</i> Blocking Disabled</span>
+      </div>
+      <div class="blocked-term-caption">
         <a id="help-icon" href="#"><i class="help-icon material-icons md-24 grey-until-hover blue">help_outline</i></a>
         <p class="text-caption">Spoiled scans pages for these phrases and hides them
         along with nearby images.</p>
       </div>
+      <!-- Empty placeholder for when no spoilers are added -->
+      <div id="empty-tip" class="tip grey fade fadeIn" style="display: none">
+        <p>Add any phrases you want to block using the form above.</p>
+      </div>
       <div id="spoiler-list-container">
+        <!-- Insert spoiler term list here -->
         <ul id="spoiler-list">
-          <!-- Insert spoiler term list here -->
-          <div id="empty-list" class="tip">
-            <p>Add any phrases you want to block using the form above.</p>
-          </div>
         </ul>
       </div>
     </div>

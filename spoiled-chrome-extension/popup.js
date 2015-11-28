@@ -54,32 +54,33 @@ function generateTermsList(terms) {
     oldList.remove();
   }
 
-  // Find our container for our terms list
-  var container = document.getElementById("spoiler-list-container");
 
   if (!terms || terms.length == 0) {
     // If it's empty, just add a placeholder tip for the user
-    var emptyDiv = document.createElement ("div");
-    emptyDiv.id = "empty-list";
-    emptyDiv.className = "tip";
-    emptyDiv.innerHTML = "<p>Add any terms you want to block using the form above.</p>";
-    container.appendChild (emptyDiv);
+    showTipBlock (true);
   } else {
-    var emptyNode = document.querySelector("#empty-list");
-    if (emptyNode) {
-      emptyNode.remove();
-    }
+    showTipBlock (false);
 
     // Start popuplating the list
     var newList = document.createElement('ul');
     newList.id = "spoiler-list";
     newList.className = "spoiler-list";
-    container.appendChild (newList);
+    // Find our container for our terms list
+    document.getElementById("spoiler-list-container").appendChild (newList);
 
     // Popuplate our list of terms in reverse order so people see their word added
     for(var i=terms.length-1; i >= 0; i--){
       newList.appendChild(generateListItem (i));
     }
+  }
+}
+
+function showTipBlock(show) {
+  var emptyTip = document.getElementById("empty-tip");
+  if (show) {
+    emptyTip.style.display = "block";
+  } else {
+    emptyTip.style.display = "none";
   }
 }
 
@@ -137,20 +138,57 @@ function addTermEnter () {
 function showPopOver() {
 	document.getElementById("help-popover").style.display = "block";
   document.getElementById("help-popover-background").style.display = "block";
+  document.querySelector(".onoffContainer").style.display = "none";
 }
 
 // CLOSE POP-OVER
 function closePopOver(divID) {
 	document.getElementById("help-popover").style.display = "none";
   document.getElementById("help-popover-background").style.display = "none";
+  document.querySelector(".onoffContainer").style.display = "block";
+}
+
+// On / Off Switch
+function clickOnOff() {
+  var isOn = document.getElementById('onoffswitch').checked;
+  storage.set({'isOn': isOn}, function() {
+    refreshOnOffViews(isOn);
+    chrome.tabs.reload();
+  });
+}
+
+function getOnOffPreferences() {
+  storage.get('isOn', function(result) {
+    refreshOnOffViews(result.isOn);
+  });
+}
+
+function refreshOnOffViews(isOn) {
+  if (!isOn) {
+    var spoilerList = document.getElementById("spoiler-list-container");
+    if (spoilerList) {
+      spoilerList.display = "none";
+    }
+    var blockingOff = document.getElementById("blockingOffTip");
+    blockingOff.style.display = "block";
+  } else {
+    var spoilerList = document.getElementById("spoiler-list-container");
+    if (spoilerList) {
+      spoilerList.display = "block";
+    }
+    var blockingOff = document.getElementById("blockingOffTip");
+    blockingOff.style.display = "none";
+  }
+  document.getElementById('onoffswitch').checked = isOn;
 }
 
 function main() {
+  getOnOffPreferences ();
+  getSpoilerTerms ();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   main();
-  getSpoilerTerms ();
   document.querySelector('#spoiler-textfield').focus ();
   document.querySelector('#add-btn').addEventListener('click', addTerm);
   document.querySelector('#add-btn').disabled = true;
@@ -158,4 +196,5 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
   document.querySelector('#help-icon').addEventListener('click', showPopOver);
   document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
+  document.querySelector('#onoffswitch').addEventListener('click', clickOnOff);
 });
