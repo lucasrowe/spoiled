@@ -137,16 +137,17 @@ a:hover {
   color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
   background-color: @blue;
-  border: 2px solid @blue-darker;
+  border: 1px solid @blue-darker;
   text-align: center;
   border-radius: 4px;
   margin: 5px;
-  padding: 2px;
+  padding: 5px;
 }
 
-.tip + .green {
-  background-color: @green;
-  border: 2px solid @green-darker;
+.tip + .grey {
+  background-color: darken(@grey, 8%);
+  border: 1px solid @grey-darker;
+  color: @black-transparent;
 }
 
 .grey {
