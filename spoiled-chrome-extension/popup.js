@@ -159,6 +159,10 @@ function clickOnOff() {
 
 function getOnOffPreferences() {
   storage.get('isOn', function(result) {
+    // Default isOn to true
+    if (result.isOn == null) {
+      result.isOn = true;
+    }
     refreshOnOffViews(result.isOn);
   });
 }
