@@ -153,6 +153,7 @@ function clickOnOff() {
   var isOn = document.getElementById('onoffswitch').checked;
   storage.set({'isOn': isOn}, function() {
     refreshOnOffViews(isOn);
+    chrome.tabs.reload();
   });
 }
 
