@@ -116,16 +116,28 @@ a:hover {
 
 .textfield {
   font-size: 12px;
-  height: 32px;
-  width: 140px;
+  height: 34px;
+  width: 146px;
   padding-left: 5px;
   padding-right: 5px;
   margin-top: 5px;
   margin-right: 5px;
   margin-bottom: 5px;
-  background-color: @grey-lighter;
-  border: 1px solid @grey-darker;
+  background-color: rgba(255, 255, 255, 0.30);
+  border: 1px solid rgba(0,0,0,0);
   border-radius: 4px;
+  color: @white-transparent;
+}
+
+input:hover {
+  background-color: rgba(255, 255, 255, 0.40);
+  color: @white-transparent;
+}
+::-webkit-input-placeholder {
+  color: @white-transparent;
+}
+input:focus::-webkit-input-placeholder {
+  color: @white-transparent;
 }
 
 .textfield-label {
@@ -194,18 +206,19 @@ a:hover {
 
 .green-button {
   background: @green;
+  border: none;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
 
 .green-button:hover {
-  background-color: darken(@green-lighter, 20%);
-  border-color: @green;
-  box-shadow: 0px 0px 0px 3px @green-lighter;
+  background-color: lighten(@green, 7.5%);
+  box-shadow: 0 0 4px rgba(0,0,0,.18),0 6px 8px rgba(0,0,0,.32);
 }
 
 .green-button:disabled {
-  background-color: @grey;
-  border-color: @grey-darker;
-  color: @grey-darker;
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.075);
+  color: @blue;
   cursor: default;
 }
 .green-button:disabled:hover {
@@ -298,6 +311,10 @@ a:hover {
 
 #remove-all-section {
   padding-bottom: 25px;
+}
+
+#add-spoiler-section {
+  background-color: @blue-darker;
 }
 
 .section {
