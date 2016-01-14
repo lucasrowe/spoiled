@@ -39,3 +39,11 @@ the stylesheet. The less stylesheet is not stored with the plugin, instead,
     compiles to spoiled-chrome-extension/style.css
 
 To make changes to the style, make sure to edit the .less file.
+    
+## Test and Deploy
+
+You can test by loading the unpacked extension in developer mode of chrome:://extensions (see Chrome's docs). Currently there are no automated tests.
+
+To promote to production, just zip up the **spoiled-chrome-extension** directory and upload it to the Chrome developer dashboard.
+    
+    zip -r spoiled.zip ./spoiled-chrome-extension/*
