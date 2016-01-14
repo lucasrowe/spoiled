@@ -26,7 +26,7 @@ I'd love help from any other spoiler haters out there. This is my first Chrome e
 #### Instructions for beginning development
 1. Download this repository.
 2. Follow [Chrome's documentation](https://developer.chrome.com/extensions/getstarted) for getting started developing extensions.
-3. Plugin content is inside the **_spoiled-chrome-extension_** folder. That's the folder that you can load under **_chrome://extensions**.
+3. Plugin content is inside the **_spoiled-chrome-extension_** folder. That's the folder that you should load from the **_chrome://extensions_** screen.
 4. Style and branding content is in the **_assets_** folder -- [Less](http://lesscss.org/) is used for CSS pre-processing.
 
 #### Dependency - Less
