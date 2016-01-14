@@ -151,6 +151,18 @@ function closePopOver(divID) {
 // On / Off Switch
 function clickOnOff() {
   var isOn = document.getElementById('onoffswitch').checked;
+  // Update the browser icon
+  if (isOn) {
+    chrome.browserAction.setIcon({
+      path: "icon.png"
+    });
+  } else {
+    chrome.browserAction.setIcon({
+      path: "icon-off.png"
+    });
+  }
+
+  // Refresh our tab to re-block or unblock content
   storage.set({'isOn': isOn}, function() {
     refreshOnOffViews(isOn);
     chrome.tabs.reload();
