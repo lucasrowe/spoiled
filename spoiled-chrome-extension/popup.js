@@ -1,4 +1,3 @@
-// For now use local but eventually we'll want some syncing
 var storage = chrome.storage.sync;
 var terms = [];
 
@@ -17,7 +16,7 @@ function addTerm () {
     if (chrome.runtime.error) {
       console.log("Runtime error.");
     }
-    generateTermsList (terms);
+    generateTermsListHTML (terms);
   });
 }
 
@@ -25,14 +24,7 @@ function removeTerm (deleteBtn)
 {
   terms.splice (deleteBtn.id, 1);
   storage.set({'spoilerterms': terms}, function() {
-    generateTermsList (terms);
-  });
-}
-
-function removeAllTerms() {
-  terms = [];
-  storage.set({'spoilerterms': terms}, function() {
-    generateTermsList (terms);
+    generateTermsListHTML (terms);
   });
 }
 
@@ -43,17 +35,16 @@ function getSpoilerTerms() {
         return;
 
       terms = result.spoilerterms;
-      generateTermsList (terms);
+      generateTermsListHTML (terms);
     });
 }
 
-function generateTermsList(terms) {
+function generateTermsListHTML(terms) {
   // Refresh the list if it exists
   var oldList = document.getElementById("spoiler-list");
   if (oldList) {
     oldList.remove();
   }
-
 
   if (!terms || terms.length == 0) {
     // If it's empty, just add a placeholder tip for the user
@@ -209,8 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#add-btn').addEventListener('click', addTerm);
   document.querySelector('#add-btn').disabled = true;
   document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermEnter);
-  document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
   document.querySelector('#help-icon').addEventListener('click', showPopOver);
   document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
-  document.querySelector('#onoffswitch').addEventListener('click', clickOnOff);
 });
