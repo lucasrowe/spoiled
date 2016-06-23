@@ -81,6 +81,90 @@
 @banner-height: 60px;
 
 // ---------------------------------------------------------
+// Buttons and Reusable Elements
+
+.flat-button {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  height: 2.25rem;
+  line-height: 2.25rem;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 150ms;
+}
+
+.flat-button:hover {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+.round-button {
+  border-radius: 50%;
+  padding: 0;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+// Mixins
+.colored-button (@color) {
+    background: @color;
+    border: none;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+.colored-button-hover (@color) {
+  background-color: lighten(@color, 7.5%);
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+.colored-button-disabled (@color) {
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.075);
+  color: @color;
+  cursor: default;
+}
+
+// Red Buttons
+.red-button {
+  .colored-button (@red);
+}
+.red-button:hover {
+  .colored-button-hover (lighten(@red-darker, 15%));
+}
+
+// Green Buttons
+.green-button {
+  .colored-button (@green);
+}
+.green-button:hover {
+  .colored-button-hover (darken(@green-darker, 7%));
+}
+.green-button:disabled {
+  .colored-button-disabled (@blue);
+}
+.green-button:disabled:hover {
+  box-shadow: 0px 0px 0px 0px @green-lighter;
+}
+
+// Blue Buttons
+.blue-button {
+  .colored-button (@blue);
+}
+.blue-button:hover {
+  .colored-button-hover (darken(@blue-darker, 7%));
+}
+
+// ---------------------------------------------------------
+
 
 body {
   width: @body-width;
@@ -171,69 +255,6 @@ input:focus::-webkit-input-placeholder {
 
 .grey {
   background: #ccc;
-}
-
-.flat-button {
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1em;
-  height: 2.25rem;
-  line-height: 2;
-  padding: 0 20px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 150ms;
-}
-
-.flat-button:hover {
-  color: #fff;
-  text-decoration: none;
-  outline: none;
-}
-
-.red {
-  color: @red;
-}
-
-.red-button {
-  background: @red;
-  border: none;
-  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
-}
-
-.red-button:hover {
-  background-color: darken(@red-lighter, 20%);
-  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
-}
-
-.green-button {
-  background: @green;
-  border: none;
-  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
-}
-
-.green-button:hover {
-  background-color: lighten(@green, 7.5%);
-  box-shadow: 0 0 4px rgba(0,0,0,.18),0 6px 8px rgba(0,0,0,.32);
-}
-
-.green-button:disabled {
-  box-shadow: none;
-  background-color: rgba(0, 0, 0, 0.075);
-  color: @blue;
-  cursor: default;
-}
-
-.green-button:disabled:hover {
-  box-shadow: 0px 0px 0px 0px @green-lighter;
 }
 
 .spoiler-list {
@@ -333,11 +354,15 @@ input:focus::-webkit-input-placeholder {
 
 
 
+
 // On Off
 // At a point of laziness I grabbed this code from https://proto.io/freebies/onoff/
 
-.onoffContainer {
-  position: relative;
+.snoozeContainer {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  z-index: top;
 }
 .onoffswitch {
   -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -402,6 +427,10 @@ input:focus::-webkit-input-placeholder {
 }
 
 // Options CSS
+
+.red {
+  color: @red;
+}
 
 .feedback-container {
   min-height: 30px;

@@ -44,37 +44,24 @@
     <!-- All Search Strings will be displayed here -->
 
     <div id="spoiler-strings" class="section">
-      <div class="onoffContainer fade fadeIn">
-        <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch">
-            <label class="onoffswitch-label" for="onoffswitch">ON</label>
-        </div>
-      </div>
       <h2>Blocked Phrases</h2>
-      <!-- Tip is hidden unless Blocking is off -->
-      <div id="blockingOffTip" class="tip fade fadeIn" style="display: none">
-        <span><i class="material-icons md-24 icon">warning</i> Blocking Disabled</span>
-      </div>
       <div class="blocked-term-caption">
         <a id="help-icon" href="#"><i class="help-icon material-icons md-24 grey-until-hover blue">help_outline</i></a>
         <p class="text-caption">Spoiled scans pages for these phrases and hides them
         along with nearby images.</p>
       </div>
-      <!-- Empty placeholder for when no spoilers are added -->
-      <div id="empty-tip" class="tip grey fade fadeIn" style="display: block">
-        <p>Add any phrases you want to block using the form above.</p>
-      </div>
+
       <div id="spoiler-list-container">
         <!-- Insert spoiler term list here -->
         <ul id="spoiler-list">
         </ul>
       </div>
+
+      <!-- Empty placeholder for when no spoilers are added -->
+      <div id="empty-tip" class="tip grey fade fadeIn" style="display: block">
+        <p>Add any phrases you want to block using the form above.</p>
+      </div>
     </div>
-
-    <!-- Manage Data Section -->
-
-
-
 
     <div id="footer" class="footer grey-until-hover">
       <a href="options.html" target="new" title="Options" class=" grey-until-hover">
@@ -83,6 +70,11 @@
         <i class="material-icons md-24 icon">code</i><span class="link-with-icon">Code</span></a>
       <a href="https://twitter.com/LucasRowe" target="new" title="Say Hello" class="grey-until-hover">
         <i class="material-icons md-24 icon">face</i><span class="link-with-icon">Hello</span></a>
+    </div>
+
+    <!-- Load Snooze last because we want it rendering on top -->
+    <div class="snoozeContainer" title="Snooze 10m">
+      <input id="snooze-btn" class="blue-button flat-button round-button material-icons" type="button" value="&#xE046;">
     </div>
 
   </body>
