@@ -205,12 +205,13 @@ input:focus::-webkit-input-placeholder {
 
 .red-button {
   background: @red;
+  border: none;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
 
 .red-button:hover {
   background-color: darken(@red-lighter, 20%);
-  border-color: @red;
-  box-shadow: 0px 0px 0px 3px @red-lighter;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
 
 .green-button {
@@ -327,6 +328,10 @@ input:focus::-webkit-input-placeholder {
   border-bottom: 1px solid lightgrey;
   padding: 8px;
 }
+
+// Snooze
+
+
 
 // On Off
 // At a point of laziness I grabbed this code from https://proto.io/freebies/onoff/
