@@ -127,16 +127,51 @@ function addTermEnter () {
 
 // SHOW POP-OVER
 function showPopOver() {
+  document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
 	document.getElementById("help-popover").style.display = "block";
-  document.getElementById("help-popover-background").style.display = "block";
-  document.querySelector(".onoffContainer").style.display = "none";
+  showBackgroundTint(true);
 }
 
 // CLOSE POP-OVER
 function closePopOver(divID) {
+  document.querySelector('#help-popover-background').removeEventListener('click', closePopOver);
 	document.getElementById("help-popover").style.display = "none";
-  document.getElementById("help-popover-background").style.display = "none";
-  document.querySelector(".onoffContainer").style.display = "block";
+  showBackgroundTint(false);
+}
+
+function showBackgroundTint(doShow) {
+  if (doShow) {
+    document.querySelector(".modal-background").style.display = "block";
+  } else {
+    document.querySelector(".modal-background").style.display = "none";
+  }
+}
+
+// Click Snooze
+
+function clickSnooze() {
+  showBackgroundTint(true);
+	document.getElementById("snoozing-text").style.display = "block";
+  showSnoozeButton(false);
+}
+
+function clickUnSnooze() {
+  showBackgroundTint(false);
+  document.getElementById("snoozing-text").style.display = "none";
+  showSnoozeButton(true);
+}
+
+function showSnoozeButton(doShow) {
+  var snoozeBtn = document.getElementById("snooze-btn");
+  var unSnoozeBtn = document.getElementById("unsnooze-btn");
+
+  if (doShow) {
+    snoozeBtn.style.display = "block";
+    unSnoozeBtn.style.display = "none";
+  } else {
+    snoozeBtn.style.display = "none";
+    unSnoozeBtn.style.display = "block";
+  }
 }
 
 // On / Off Switch
@@ -201,5 +236,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#add-btn').disabled = true;
   document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermEnter);
   document.querySelector('#help-icon').addEventListener('click', showPopOver);
-  document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
+  document.querySelector('#snooze-btn').addEventListener('click', clickSnooze);
+  document.querySelector('#unsnooze-btn').addEventListener('click', clickUnSnooze);
 });

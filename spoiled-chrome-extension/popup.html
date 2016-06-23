@@ -31,6 +31,11 @@
           <li>Does not block "Star Trek" (all words in the phrase must be found)</li>
         </ul>
       </div>
+
+      <!-- Snooze text appears only when in snooze mode-->
+      <div id="snoozing-text" class="snooze-text" style="display:none">
+        <h1>snoozed</h1>
+      </div>
     </div>
 
     <!-- This will get more complicated when new spoiler groups can be managed -->
@@ -73,8 +78,18 @@
     </div>
 
     <!-- Load Snooze last because we want it rendering on top -->
-    <div class="snoozeContainer" title="Snooze 10m">
-      <input id="snooze-btn" class="blue-button flat-button round-button material-icons" type="button" value="&#xE046;">
+    <div class="snoozeContainer" >
+      <input id="snooze-btn"
+             title="Snooze 10m"
+             class="blue-button flat-button round-button material-icons"
+             type="button"
+             value="&#xE046;"/>
+      <input id="unsnooze-btn"
+             title="Unsnooze"
+             class="blue-button flat-button round-button material-icons"
+             style="display: none;"
+             type="button"
+             value="&#xE857;"/>
     </div>
 
   </body>
