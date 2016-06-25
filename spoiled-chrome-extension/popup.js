@@ -127,14 +127,18 @@ function addTermEnter () {
 
 // SHOW POP-OVER
 function showPopOver() {
-  document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
+  var tintedBackground = document.querySelector('#help-popover-background');
+  tintedBackground.addEventListener('click', closePopOver);
+  tintedBackground.style.display = "block";
 	document.getElementById("help-popover").style.display = "block";
   showBackgroundTint(true);
 }
 
 // CLOSE POP-OVER
 function closePopOver(divID) {
-  document.querySelector('#help-popover-background').removeEventListener('click', closePopOver);
+  var tintedBackground = document.querySelector('#help-popover-background');
+  tintedBackground.removeEventListener('click', closePopOver);
+  tintedBackground.style.display = "none";
 	document.getElementById("help-popover").style.display = "none";
   showBackgroundTint(false);
 }
@@ -174,58 +178,7 @@ function showSnoozeButton(doShow) {
   }
 }
 
-// On / Off Switch
-function clickOnOff() {
-  var isOn = document.getElementById('onoffswitch').checked;
-  // Update the browser icon
-  if (isOn) {
-    chrome.browserAction.setIcon({
-      path: "icon.png"
-    });
-  } else {
-    chrome.browserAction.setIcon({
-      path: "icon-off.png"
-    });
-  }
-
-  // Refresh our tab to re-block or unblock content
-  storage.set({'isOn': isOn}, function() {
-    refreshOnOffViews(isOn);
-    chrome.tabs.reload();
-  });
-}
-
-function getOnOffPreferences() {
-  storage.get('isOn', function(result) {
-    // Default isOn to true
-    if (result.isOn == null) {
-      result.isOn = true;
-    }
-    refreshOnOffViews(result.isOn);
-  });
-}
-
-function refreshOnOffViews(isOn) {
-  if (!isOn) {
-    var spoilerList = document.getElementById("spoiler-list-container");
-    if (spoilerList) {
-      spoilerList.display = "none";
-    }
-    var blockingOff = document.getElementById("blockingOffTip");
-    blockingOff.style.display = "block";
-  } else {
-    var spoilerList = document.getElementById("spoiler-list-container");
-    if (spoilerList) {
-      spoilerList.display = "block";
-    }
-    var blockingOff = document.getElementById("blockingOffTip");
-    blockingOff.style.display = "none";
-  }
-  document.getElementById('onoffswitch').checked = isOn;
-}
-
 function main() {
-  getOnOffPreferences ();
   getSpoilerTerms ();
 }
 
