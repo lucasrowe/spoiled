@@ -1,7 +1,7 @@
 var storage = chrome.storage.sync;
 
 // Delete all terms
-function removeAllTerms() {
+function clickRemoveAllTerms() {
   terms = [];
   var feedback = document.querySelector(".delete-feedback");
   feedback.style.display = "none";
@@ -23,5 +23,5 @@ function restore_options() {
 
 document.addEventListener('DOMContentLoaded', function () {
   restore_options();
-  document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
+  document.querySelector('#delete-all-btn').addEventListener('click', clickRemoveAllTerms);
 });
