@@ -120,17 +120,21 @@
 .colored-button (@color) {
     background: @color;
     border: none;
-    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    .drop-shadow(4px);
 }
 .colored-button-hover (@color) {
   background-color: lighten(@color, 7.5%);
-  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  .drop-shadow(6px);
 }
 .colored-button-disabled (@color) {
   box-shadow: none;
   background-color: rgba(0, 0, 0, 0.075);
   color: @color;
   cursor: default;
+}
+
+.drop-shadow (@size) {
+  box-shadow: 0 0 @size rgba(0,0,0,.14),0 @size @size*2 rgba(0,0,0,.28);
 }
 
 // Red Buttons
