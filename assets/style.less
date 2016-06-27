@@ -169,6 +169,9 @@
 
 // ---------------------------------------------------------
 
+body, html {
+  height: 100%;
+}
 
 body {
   width: @body-width;
@@ -308,12 +311,11 @@ input:focus::-webkit-input-placeholder {
 	position: absolute;
   display: none;
 	width: @popup-width - 40px;
-	background-color: @grey;
+	background-color: @grey-lighter;
   padding: 10px;
-  padding-top: -15px;
   margin-left: 10px;
   margin-top: @banner-height - 20px;
-  border-radius: 6px;
+  border-radius: 2px;
   color: @black-transparent;
 
   li {
@@ -322,13 +324,11 @@ input:focus::-webkit-input-placeholder {
 }
 
 .modal-background {
-  position: absolute;
+  position: fixed;
   display: none;
-  top: 0px;
-  background-color: rgba(0, 0, 0, 0.75);
-  float: left;
-  margin-top: 0px;
-  height: 100%;
+  background-color: rgba(2, 20, 40, 80%);
+  top: 0;
+  min-height: 100%;
   width: 100%;
   animation-name: fadeIn;
   animation-duration: 0.5s;
@@ -343,6 +343,7 @@ input:focus::-webkit-input-placeholder {
 #spoiler-strings {
   background-color: #f8f8f8;
   padding-bottom: 20px;
+  min-height: 250px;
 }
 
 #add-spoiler-section {
@@ -356,9 +357,9 @@ input:focus::-webkit-input-placeholder {
 
 // Snooze
 .snoozeContainer {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
+  position: fixed;
+  bottom: 12px;
+  right: 16px;
   z-index: top;
 }
 

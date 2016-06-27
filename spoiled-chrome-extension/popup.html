@@ -13,6 +13,15 @@
       <h1>Spoiled</h1>
     </div>
 
+    <!-- Only displays when Snooze button is pressed (or popup starts already snoozed) -->
+    <div id="snooze-popover-background" class="modal-background fade fadeIn">
+      <!-- Snooze text appears only when in snooze mode-->
+      <div id="snoozing-text" class="snooze-text">
+        <h1>snoozed</h1>
+      </div>
+    </div>
+
+    <!-- Only displays when Help button is pressed -->
     <div id="help-popover-background" class="modal-background fade fadeIn">
       <div id="help-popover" class="help-popover popover fade fadeIn">
         <a id="" href="#"><i class="help-icon material-icons md-24 grey-until-hover">cancel</i></a>
@@ -30,11 +39,6 @@
           <li>Does not block "StarWars" (spaces affect matching)</li>
           <li>Does not block "Star Trek" (all words in the phrase must be found)</li>
         </ul>
-      </div>
-
-      <!-- Snooze text appears only when in snooze mode-->
-      <div id="snoozing-text" class="snooze-text" style="display:none">
-        <h1>snoozed</h1>
       </div>
     </div>
 
@@ -86,7 +90,7 @@
              value="&#xE046;"/>
       <input id="unsnooze-btn"
              title="Unsnooze"
-             class="blue-button flat-button round-button material-icons"
+             class="red-button flat-button round-button material-icons"
              style="display: none;"
              type="button"
              value="&#xE857;"/>

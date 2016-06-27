@@ -131,7 +131,6 @@ function showPopOver() {
   tintedBackground.addEventListener('click', closePopOver);
   tintedBackground.style.display = "block";
 	document.getElementById("help-popover").style.display = "block";
-  showBackgroundTint(true);
 }
 
 // CLOSE POP-OVER
@@ -140,7 +139,20 @@ function closePopOver(divID) {
   tintedBackground.removeEventListener('click', closePopOver);
   tintedBackground.style.display = "none";
 	document.getElementById("help-popover").style.display = "none";
+}
+
+// Click Snooze
+
+function clickSnooze() {
+  showBackgroundTint(true);
+	document.getElementById("snoozing-text").style.display = "block";
+  toggleSnoozeButton(false);
+}
+
+function clickUnSnooze() {
   showBackgroundTint(false);
+  document.getElementById("snoozing-text").style.display = "none";
+  toggleSnoozeButton(true);
 }
 
 function showBackgroundTint(doShow) {
@@ -151,21 +163,7 @@ function showBackgroundTint(doShow) {
   }
 }
 
-// Click Snooze
-
-function clickSnooze() {
-  showBackgroundTint(true);
-	document.getElementById("snoozing-text").style.display = "block";
-  showSnoozeButton(false);
-}
-
-function clickUnSnooze() {
-  showBackgroundTint(false);
-  document.getElementById("snoozing-text").style.display = "none";
-  showSnoozeButton(true);
-}
-
-function showSnoozeButton(doShow) {
+function toggleSnoozeButton(doShow) {
   var snoozeBtn = document.getElementById("snooze-btn");
   var unSnoozeBtn = document.getElementById("unsnooze-btn");
 
