@@ -17,6 +17,7 @@
 @grey: #ECEFF1;
 @grey-lighter: #FAFAFA;
 @grey-darker: #afb5b9;
+@tooltip-grey: rgba(70,70,70,.9);
 
 // Typography
 // The fonts in this project are owned by Google, licensed
@@ -260,6 +261,21 @@ input:focus::-webkit-input-placeholder {
   color: @black-transparent;
 }
 
+.tooltip {
+  background: @tooltip-grey;
+  border-radius: 2px;
+  .drop-shadow(2);
+  color: #ececec;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1em;
+  max-width: 200px;
+  overflow: hidden;
+  padding: 6px 8px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
 .grey {
   background: #ccc;
 }
@@ -372,10 +388,24 @@ input:focus::-webkit-input-placeholder {
   left: 13%;
 }
 
+.snooze-hovertip:hover .snooze.tooltip {
+  display: block;
+}
+
+.snooze.tooltip {
+  display:none;
+  position: absolute;
+  bottom: 40px;
+  right: 0px;
+  animation-duration: 1.0s;
+  animation-name: fadeIn;
+}
+
 // ---- footer
 
 .footer {
   padding: 5px;
+  max-height: 25px;
   a {
     padding: 8px;
   }

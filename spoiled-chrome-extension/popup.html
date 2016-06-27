@@ -83,11 +83,14 @@
 
     <!-- Load Snooze last because we want it rendering on top -->
     <div class="snoozeContainer" >
-      <input id="snooze-btn"
-             title="Snooze 10m"
-             class="blue-button flat-button round-button material-icons"
-             type="button"
-             value="&#xE046;"/>
+      <div class="snooze-hovertip">
+        <label><span class="snooze tooltip fade fadeIn">Snooze</span></label>
+        <input id="snooze-btn"
+               title="Snooze 10m"
+               class="blue-button flat-button round-button material-icons"
+               type="button"
+               value="&#xE046;"/>
+      </div>
       <input id="unsnooze-btn"
              title="Unsnooze"
              class="red-button flat-button round-button material-icons"
