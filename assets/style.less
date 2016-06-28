@@ -26,18 +26,8 @@
 // ---------------------------------------------------------
 
 // Fonts -----
-.text-heading {
-}
-.text-caption {
-  color: rgba(0, 0, 0, 0.8);
-}
-.text-button {
-  text-transform: uppercase;
-}
-
 @white-transparent: rgba(255, 255, 255, 0.85);
-@black-transparent: rgba(0, 0, 0, 0.8);
-
+@black-transparent: rgba(0, 0, 0, 0.58);
 
 // Icons -----
 
@@ -171,6 +161,7 @@
 // ---------------------------------------------------------
 
 body {
+  font-size: 0.8em;
   width: @body-width;
   margin: 0px;
   font-family: 'Roboto', sans-serif;
@@ -183,14 +174,14 @@ body.options {
 
 a {
   text-decoration: none;
-  color: @green-darker;
+  color: @blue-darker;
 }
 a:hover {
-  color: @green-lighter;
+  color: @blue-lighter;
 }
 
 .page-header {
-  font-size: 15px;
+  font-size: 1.3em;
   height: @banner-height;
   margin: 0px -10px 0px -10px;
   padding: 20px;
@@ -240,23 +231,23 @@ input:focus::-webkit-input-placeholder {
 
 .tip {
   color: rgba(255, 255, 255, 0.85);
-  font-size: 14px;
   background-color: @red;
   border: 1px solid @red-darker;
   text-align: center;
   border-radius: 4px;
   margin: 5px;
-  padding: 5px;
+  padding: 35px 25px 35px 25px;
   animation-name: fadeIn;
   animation-duration: 0.75s;
 }
 
 .tip.grey {
-  background-color: darken(@grey, 8%);
-  border: 1px solid @grey-darker;
-  color: @black-transparent;
+  background-color: darken(@grey-lighter, 3%);
+  border: 1px solid darken(@grey, 7%);
+  color: lighten(@black-transparent, 30%);
 }
 
+// Material designy tooltip
 .tooltip {
   background: @tooltip-grey;
   border-radius: 2px;
@@ -286,6 +277,7 @@ input:focus::-webkit-input-placeholder {
   margin: 2px;
   padding-top: 5px;
   border: 1px solid lightgrey;
+  border-radius: 4px;
 }
 
 .search-term {
@@ -302,6 +294,7 @@ input:focus::-webkit-input-placeholder {
 
 .grey-until-hover {
   color: @grey-darker;
+  transition: all 0.25s ease-in;
 }
 
 .grey-until-hover:hover {
