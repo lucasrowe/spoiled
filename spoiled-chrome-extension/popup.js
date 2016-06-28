@@ -129,6 +129,7 @@ function addTermEnter () {
 function showPopOver() {
   var tintedBackground = document.querySelector('#help-popover-background');
   tintedBackground.addEventListener('click', closePopOver);
+  document.querySelector('#snooze-btn').addEventListener('click', closePopOver);
   tintedBackground.style.display = "block";
 	document.getElementById("help-popover").style.display = "block";
 }
@@ -137,6 +138,7 @@ function showPopOver() {
 function closePopOver(divID) {
   var tintedBackground = document.querySelector('#help-popover-background');
   tintedBackground.removeEventListener('click', closePopOver);
+  document.querySelector('#snooze-btn').removeEventListener('click', closePopOver);
   tintedBackground.style.display = "none";
 	document.getElementById("help-popover").style.display = "none";
 }

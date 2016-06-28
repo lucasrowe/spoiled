@@ -372,7 +372,6 @@ input:focus::-webkit-input-placeholder {
   position: fixed;
   bottom: 12px;
   right: 16px;
-  z-index: top;
 }
 
 .snooze-text {
@@ -386,6 +385,7 @@ input:focus::-webkit-input-placeholder {
 
 .unsnooze-hovertip:hover .unsnooze.tooltip,
 .snooze-hovertip:hover .snooze.tooltip {
+  display: block;
   animation-play-state: running;
   animation-duration: 0.5s;
   animation-delay: 0.5s;
@@ -394,6 +394,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 .snooze.tooltip, .unsnooze.tooltip {
+  display: none;
   opacity: 0;
   position: absolute;
   bottom: 40px;
