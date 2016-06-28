@@ -389,16 +389,19 @@ input:focus::-webkit-input-placeholder {
 }
 
 .snooze-hovertip:hover .snooze.tooltip {
-  display: block;
+  animation-play-state: running;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
 }
 
 .snooze.tooltip {
-  display:none;
+  opacity: 0;
   position: absolute;
   bottom: 40px;
   right: 0px;
-  animation-duration: 1.0s;
-  animation-name: fadeIn;
+  animation-play-state: paused;
 }
 
 // ---- footer
