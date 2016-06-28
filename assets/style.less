@@ -384,6 +384,7 @@ input:focus::-webkit-input-placeholder {
   left: 13%;
 }
 
+.unsnooze-hovertip:hover .unsnooze.tooltip,
 .snooze-hovertip:hover .snooze.tooltip {
   animation-play-state: running;
   animation-duration: 0.5s;
@@ -392,12 +393,17 @@ input:focus::-webkit-input-placeholder {
   animation-fill-mode: forwards;
 }
 
-.snooze.tooltip {
+.snooze.tooltip, .unsnooze.tooltip {
   opacity: 0;
   position: absolute;
   bottom: 40px;
   right: 0px;
+  text-align: center;
   animation-play-state: paused;
+}
+
+.unsnooze.tooltip {
+  width: 50px;
 }
 
 // ---- footer
