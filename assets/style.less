@@ -373,8 +373,17 @@ input:focus::-webkit-input-placeholder {
   font-size: 2em;
   // HACK This is not how to center!
   position: absolute;
-  bottom: 38%;
-  left: 13%;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+
+  h1,p {
+    text-align: center;
+  }
+  p {
+    margin-top: -15px;
+  }
 }
 
 .unsnooze-hovertip:hover .unsnooze.tooltip,
