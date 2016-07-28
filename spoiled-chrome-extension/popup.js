@@ -49,8 +49,10 @@ function generateTermsListHTML(terms) {
   if (!terms || terms.length == 0) {
     // If it's empty, just add a placeholder tip for the user
     showEmptyListBlock (true);
+    document.querySelector('#snooze-btn').disabled = true;
   } else {
     showEmptyListBlock (false);
+    document.querySelector('#snooze-btn').disabled = false;
 
     // Start popuplating the list
     var newList = document.createElement('ul');

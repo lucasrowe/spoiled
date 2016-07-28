@@ -157,6 +157,10 @@
 .blue-button:hover {
   .colored-button-hover (darken(@blue-darker, 7%));
 }
+.blue-button:disabled {
+  .colored-button-disabled (white);
+  background-color: @grey-darker;
+}
 
 // ---------------------------------------------------------
 
@@ -391,7 +395,7 @@ input:focus::-webkit-input-placeholder {
   display: block;
   animation-play-state: running;
   animation-duration: 0.5s;
-  animation-delay: 0.5s;
+  animation-delay: 0.15s;
   animation-name: fadeIn;
   animation-fill-mode: forwards;
 }
