@@ -69,6 +69,8 @@ function generateTermsListHTML(terms) {
   }
 }
 
+// CONDITIONAL HTML (List, Empty Block, etc.)
+
 function showEmptyListBlock(show) {
   var emptyTip = document.getElementById("empty-tip");
   if (show) {
@@ -128,7 +130,8 @@ function addTermToListEnter () {
   }
 }
 
-// SHOW POP-OVER
+// POP-OVER HELP
+
 function showPopOver() {
   var tintedBackground = document.querySelector('#help-popover-background');
   tintedBackground.addEventListener('click', closePopOver);
@@ -137,7 +140,6 @@ function showPopOver() {
 	document.getElementById("help-popover").style.display = "block";
 }
 
-// CLOSE POP-OVER
 function closePopOver(divID) {
   var tintedBackground = document.querySelector('#help-popover-background');
   tintedBackground.removeEventListener('click', closePopOver);
@@ -146,7 +148,7 @@ function closePopOver(divID) {
   document.getElementById("help-popover").style.display = "none";
 }
 
-// Click Snooze
+// SNOOZE BEHAVIOR
 
 function displaySnoozeScreen(snoozeOn, timeToUnsnooze) {
   if (snoozeOn) {
@@ -223,6 +225,8 @@ function toggleSnoozeButton(doShow) {
     unSnoozeBtn.style.display = "block";
   }
 }
+
+// MAIN
 
 function main() {
   getSpoilerTerms ();
