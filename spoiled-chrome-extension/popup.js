@@ -1,5 +1,6 @@
 var storage = chrome.storage.sync;
 var terms = [];
+var snoozeTime = 1000 * 60 * 5;
 
 function addTermToList () {
   // Save it using the Chrome extension storage API.
@@ -62,7 +63,7 @@ function generateTermsListHTML(terms) {
     document.getElementById("spoiler-list-container").appendChild (newList);
 
     // Popuplate our list of terms in reverse order so people see their word added
-    for(var i=terms.length-1; i >= 0; i--){
+    for(var i=terms.length-1; i >= 0; i--) {
       newList.appendChild(generateListItem (i));
     }
   }
@@ -142,19 +143,30 @@ function closePopOver(divID) {
   tintedBackground.removeEventListener('click', closePopOver);
   document.querySelector('#snooze-btn').removeEventListener('click', closePopOver);
   tintedBackground.style.display = "none";
-	document.getElementById("help-popover").style.display = "none";
+  document.getElementById("help-popover").style.display = "none";
 }
 
 // Click Snooze
 
-function displaySnoozeScreen(snoozeOn) {
+function displaySnoozeScreen(snoozeOn, timeToUnsnooze) {
   if (snoozeOn) {
-	   document.getElementById("snoozing-text").style.display = "block";
+    document.getElementById("snoozing-text").style.display = "block";
+    // Set the "until X:XX PM string"
+    var unsnoozeTime = new Date(timeToUnsnooze);
+    var str = "until " + stripSecondsFromTimeString(unsnoozeTime.toLocaleTimeString());
+    document.querySelector(".snooze-time-remaining").innerHTML = str;
   } else {
-    document.getElementById("snoozing-text").style.display = "none";
+    document.querySelector(".snooze-text").style.display = "none";
   }
   showBackgroundTint(snoozeOn);
   toggleSnoozeButton(!snoozeOn);
+}
+
+function stripSecondsFromTimeString (timeString) {
+  var splitTime = timeString.split(":");
+  var strippedTime = splitTime[0] + ":" + splitTime[1];
+  var strippedAMPM = splitTime[2].split(" ")[1];
+  return strippedTime + " " + strippedAMPM;
 }
 
 function showBackgroundTint(doShow) {
@@ -166,14 +178,37 @@ function showBackgroundTint(doShow) {
 }
 
 function snooze(snoozeOn) {
-  var now = new Date();
-  storage.set({'snoozeOn': snoozeOn, 'timeSnoozed': now},
+  var timeToUnsnooze = new Date().getTime() + snoozeTime
+  storage.set({'isSnoozeOn': snoozeOn, 'timeToUnsnooze': timeToUnsnooze},
     function() {
       if (chrome.runtime.error) {
         console.log("Runtime error.");
       }
-    displaySnoozeScreen(snoozeOn);
+    displaySnoozeScreen(snoozeOn, timeToUnsnooze);
   });
+}
+
+function getSnoozePrefs() {
+  storage.get(['isSnoozeOn', 'timeToUnsnooze'], function(result) {
+    // Default isSnoozeOn to false
+    if (result.isSnoozeOn == null) {
+      result.isSnoozeOn = false;
+    }
+
+    // Display the snooze screen (or turn snooze off)
+    if (result.isSnoozeOn && isSnoozeTimeUp(result.timeToUnsnooze)) {
+      // Time is up, turn off snooze
+      snooze(false);
+    } else {
+      displaySnoozeScreen(result.isSnoozeOn, result.timeToUnsnooze);
+    }
+  });
+}
+
+function isSnoozeTimeUp(timeToUnsnooze) {
+  var now = new Date();
+  var isPastSnoozeTime = now.getTime() > timeToUnsnooze;
+  return isPastSnoozeTime;
 }
 
 function toggleSnoozeButton(doShow) {
@@ -195,6 +230,7 @@ function main() {
 
 document.addEventListener('DOMContentLoaded', function () {
   main();
+  getSnoozePrefs();
   document.querySelector('#spoiler-textfield').focus ();
   document.querySelector('#add-btn').addEventListener('click', addTermToList);
   document.querySelector('#add-btn').disabled = true;
