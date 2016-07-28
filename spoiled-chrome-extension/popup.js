@@ -1,6 +1,6 @@
 var storage = chrome.storage.sync;
 var terms = [];
-var snoozeTime = 1000 * 60 * 5;
+var snoozeTime = 1000 * 60 * 10;
 
 function addTermToList () {
   // Save it using the Chrome extension storage API.
