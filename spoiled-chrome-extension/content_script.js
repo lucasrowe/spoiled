@@ -1,12 +1,15 @@
-var cachedTerms = []
+var cachedTerms = [];
 var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
 var containerElements = "span, div, li, th, td, dt, dd";
 
+// Every time a page is loaded, check our spoil terms and block,
+// after making sure settings allow blocking on this page.
 chrome.storage.sync.get(null, function(result) {
-  // Don't do anything if blocking is diabled
-  if (!result.isOn) {
+  // Don't manipulate page if blocking is snoozed
+  if (result.isSnoozeOn && !isSnoozeTimeUp(result.timeToUnsnooze)) {
     return;
   }
+  // Don't manipulate page if user hasn't entered any terms
   if (!result.spoilerterms) {
     return;
   }
@@ -16,6 +19,14 @@ chrome.storage.sync.get(null, function(result) {
   cachedTerms = result.spoilerterms;
   blockSpoilerContent (document, result.spoilerterms, "[text replaced by Spoiled]");
 });
+
+// This is a duplicate method. I don't know how to have utility scripts shared
+// by both the content script and the popup script.
+function isSnoozeTimeUp(timeToUnsnooze) {
+  var now = new Date();
+  var isPastSnoozeTime = now.getTime() > timeToUnsnooze;
+  return isPastSnoozeTime;
+}
 
 function blockSpoilerContent (rootNode, spoilerTerms, blockText) {
   // Search innerHTML elements first
