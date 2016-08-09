@@ -132,7 +132,7 @@ function addTermToListEnter () {
 
 // POP-OVER HELP
 
-function showPopOver() {
+function clickHelpPopoverIcon() {
   var tintedBackground = document.querySelector('#help-popover-background');
   tintedBackground.addEventListener('click', closePopOver);
   document.querySelector('#snooze-btn').addEventListener('click', closePopOver);
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#add-btn').addEventListener('click', addTermToList);
   document.querySelector('#add-btn').disabled = true;
   document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermToListEnter);
-  document.querySelector('#help-icon').addEventListener('click', showPopOver);
   document.querySelector('#snooze-btn').addEventListener('click', function() { snooze(true); } );
   document.querySelector('#unsnooze-btn').addEventListener('click', function() { snooze(false); });
+  document.querySelector('#help-icon').addEventListener('click', clickHelpPopoverIcon);
 });
