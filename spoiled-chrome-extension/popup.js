@@ -179,7 +179,15 @@ function showBackgroundTint(doShow) {
   }
 }
 
-function snooze(snoozeOn) {
+function clickSnooze(snoozeOn) {
+  setSnoozePrefs(snoozeOn)
+
+  // Always refresh the page. Either the user wants content hidden now
+  // (snooze) or revealed (unsnooze)
+  chrome.tabs.reload();
+}
+
+function setSnoozePrefs(snoozeOn) {
   var timeToUnsnooze = new Date().getTime() + snoozeTime
   storage.set({'isSnoozeOn': snoozeOn, 'timeToUnsnooze': timeToUnsnooze},
     function() {
@@ -188,10 +196,6 @@ function snooze(snoozeOn) {
       }
     displaySnoozeScreen(snoozeOn, timeToUnsnooze);
   });
-
-  // Always refresh the page. Either the user wants content hidden now
-  // (snooze) or revealed (unsnooze)
-  chrome.tabs.reload();
 }
 
 function getSnoozePrefs() {
@@ -204,7 +208,7 @@ function getSnoozePrefs() {
     // Display the snooze screen (or turn snooze off)
     if (result.isSnoozeOn && isSnoozeTimeUp(result.timeToUnsnooze)) {
       // Time is up, turn off snooze
-      snooze(false);
+      setSnoozePrefs(false);
     } else {
       displaySnoozeScreen(result.isSnoozeOn, result.timeToUnsnooze);
     }
@@ -243,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#add-btn').addEventListener('click', addTermToList);
   document.querySelector('#add-btn').disabled = true;
   document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermToListEnter);
-  document.querySelector('#snooze-btn').addEventListener('click', function() { snooze(true); } );
-  document.querySelector('#unsnooze-btn').addEventListener('click', function() { snooze(false); });
   document.querySelector('#help-icon').addEventListener('click', clickHelpPopoverIcon);
+  document.querySelector('#snooze-btn').addEventListener('click', function() { clickSnooze(true); } );
+  document.querySelector('#unsnooze-btn').addEventListener('click', function() { clickSnooze(false); });
 });
