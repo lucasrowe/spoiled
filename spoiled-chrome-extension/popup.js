@@ -188,6 +188,10 @@ function snooze(snoozeOn) {
       }
     displaySnoozeScreen(snoozeOn, timeToUnsnooze);
   });
+
+  // Always refresh the page. Either the user wants content hidden now
+  // (snooze) or revealed (unsnooze)
+  chrome.tabs.reload();
 }
 
 function getSnoozePrefs() {
