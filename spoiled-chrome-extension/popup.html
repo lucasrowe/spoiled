@@ -12,6 +12,16 @@
       <img src="logo.png" alt="SPOILED logo" class=""/>
     </div>
 
+    <!-- Only displays when Snooze button is pressed (or popup starts already snoozed) -->
+    <div id="snooze-popover-background" class="modal-background fade fadeIn">
+      <!-- Snooze text appears only when in snooze mode-->
+      <div id="snoozing-text" class="snooze-text">
+        <h1>snoozed</h1>
+        <p class="snooze-time-remaining">until 7:10 PM</p>
+      </div>
+    </div>
+
+    <!-- Only displays when Help button is pressed -->
     <div id="help-popover-background" class="modal-background fade fadeIn">
       <div id="help-popover" class="help-popover popover fade fadeIn">
         <a id="" href="#"><i class="help-icon material-icons md-24 grey-until-hover">cancel</i></a>
@@ -19,7 +29,7 @@
         <p>Spoiled looks on every webpage to see if any of the Blocked Phrases
         you provide exist on that page.</p>
         <ul>
-          <li>All of the Blocked Phrase must match, including spaces</li>
+          <li>The entire Blocked Phrase must match, including spaces</li>
           <li>Blocked Phrases can be any case</li>
         </ul>
         <p>For example, the phrase "Star Wars"</p>
@@ -29,10 +39,12 @@
           <li>Does not block "StarWars" (spaces affect matching)</li>
           <li>Does not block "Star Trek" (all words in the phrase must be found)</li>
         </ul>
+        <p><b>Advanced Tip:</b><br/> Spoiled supports <a href="http://www.regexr.com/" target="_blank">Regular Expressions</a>
+          if you are comfortable using them.</p>
       </div>
     </div>
 
-    <!-- THis will get more complicated when new spoiler groups can be managed -->
+    <!-- This will get more complicated when new spoiler groups can be managed -->
     <div id="add-spoiler-section" class="section">
       <div id="spoiler-entry-field">
         <input id="spoiler-textfield" class="textfield" type="text" name="spoiler string" placeholder="Enter Phrase to Block">
@@ -43,47 +55,53 @@
     <!-- All Search Strings will be displayed here -->
 
     <div id="spoiler-strings" class="section">
-      <div class="onoffContainer fade fadeIn">
-        <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch">
-            <label class="onoffswitch-label" for="onoffswitch">ON</label>
-        </div>
-      </div>
-      <h2>Blocked Phrases</h2>
-      <!-- Tip is hidden unless Blocking is off -->
-      <div id="blockingOffTip" class="tip fade fadeIn" style="display: none">
-        <span><i class="material-icons md-24 icon">warning</i> Blocking Disabled</span>
-      </div>
       <div class="blocked-term-caption">
         <a id="help-icon" href="#"><i class="help-icon material-icons md-24 grey-until-hover blue">help_outline</i></a>
         <p class="text-caption">Spoiled scans pages for these phrases and hides them
         along with nearby images.</p>
       </div>
-      <!-- Empty placeholder for when no spoilers are added -->
-      <div id="empty-tip" class="tip grey fade fadeIn" style="display: block">
-        <p>Add any phrases you want to block using the form above.</p>
-      </div>
+      <h2>Blocked Phrases</h2>
       <div id="spoiler-list-container">
         <!-- Insert spoiler term list here -->
         <ul id="spoiler-list">
         </ul>
       </div>
+
+      <!-- Empty placeholder for when no spoilers are added -->
+      <div id="empty-tip" class="tip grey fade fadeIn" style="display: block">
+        <p>Add any phrases you want to block using the form above.</p>
+      </div>
     </div>
 
-    <!-- Manage Data Section -->
-
-    <div id="remove-all-section" class="section">
-      <form class="spoiler-removal-form">
-        <h2>Manage Data</h2>
-        <input id="delete-all-btn" class="red-button flat-button" type="submit" value="DELETE ALL PHRASES">
-      </form>
+    <div id="footer" class="footer section">
+      <div class="grey-until-hover">
+        <a href="options.html" target="new" title="Options" class=" grey-until-hover">
+          <i class="material-icons md-24 icon">settings</i><span class="link-with-icon"></span></a>
+        <a href="https://github.com/lucasrowe/spoiled" target="new" title="Code" class=" grey-until-hover">
+          <i class="material-icons md-24 icon">code</i><span class="link-with-icon">Code</span></a>
+        <a href="https://twitter.com/LucasRowe" target="new" title="Say Hello" class="grey-until-hover">
+          <i class="material-icons md-24 icon">mood</i><span class="link-with-icon">Hello</span></a>
+      </div>
     </div>
 
-    <div id="footer" class="footer grey-until-hover">
-      <a href="https://github.com/lucasrowe/spoiled" target="new" title="Contribute" class=" grey-until-hover">
-        <i class="material-icons md-24 icon">code</i><span class="link-with-icon">Contribute</span></a>
-      <a href="https://twitter.com/LucasRowe" target="new" title="Feedback" class="grey-until-hover">
-        <i class="material-icons md-24 icon">feedback</i><span class="link-with-icon">Contact</span></a>
+    <!-- Load Snooze last because we want it rendering on top -->
+    <div class="snoozeContainer" >
+      <div class="snooze-hovertip">
+        <label><span class="snooze tooltip fade fadeIn">Snooze</span></label>
+        <input id="snooze-btn"
+               class="blue-button flat-button round-button material-icons"
+               type="button"
+               value="&#xE046;"
+               disabled/>
+      </div>
+      <div class="unsnooze-hovertip">
+        <label><span class="unsnooze tooltip fade fadeIn">Wake Up</span></label>
+        <input id="unsnooze-btn"
+               class="red-button flat-button round-button material-icons"
+               style="display: none;"
+               type="button"
+               value="&#xE857;"/>
+      </div>
     </div>
 
   </body>

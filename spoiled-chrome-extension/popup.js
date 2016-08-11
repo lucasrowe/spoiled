@@ -1,8 +1,8 @@
-// For now use local but eventually we'll want some syncing
 var storage = chrome.storage.sync;
 var terms = [];
+var snoozeTime = 1000 * 60 * 10;
 
-function addTerm () {
+function addTermToList () {
   // Save it using the Chrome extension storage API.
   var newTerm = document.getElementById('spoiler-textfield').value;
   document.getElementById('spoiler-textfield').value = "";
@@ -17,22 +17,15 @@ function addTerm () {
     if (chrome.runtime.error) {
       console.log("Runtime error.");
     }
-    generateTermsList (terms);
+    generateTermsListHTML (terms);
   });
 }
 
-function removeTerm (deleteBtn)
+function removeTermFromList (deleteBtn)
 {
   terms.splice (deleteBtn.id, 1);
   storage.set({'spoilerterms': terms}, function() {
-    generateTermsList (terms);
-  });
-}
-
-function removeAllTerms() {
-  terms = [];
-  storage.set({'spoilerterms': terms}, function() {
-    generateTermsList (terms);
+    generateTermsListHTML (terms);
   });
 }
 
@@ -43,23 +36,24 @@ function getSpoilerTerms() {
         return;
 
       terms = result.spoilerterms;
-      generateTermsList (terms);
+      generateTermsListHTML (terms);
     });
 }
 
-function generateTermsList(terms) {
+function generateTermsListHTML(terms) {
   // Refresh the list if it exists
   var oldList = document.getElementById("spoiler-list");
   if (oldList) {
     oldList.remove();
   }
 
-
   if (!terms || terms.length == 0) {
     // If it's empty, just add a placeholder tip for the user
-    showTipBlock (true);
+    showEmptyListBlock (true);
+    document.querySelector('#snooze-btn').disabled = true;
   } else {
-    showTipBlock (false);
+    showEmptyListBlock (false);
+    document.querySelector('#snooze-btn').disabled = false;
 
     // Start popuplating the list
     var newList = document.createElement('ul');
@@ -69,13 +63,15 @@ function generateTermsList(terms) {
     document.getElementById("spoiler-list-container").appendChild (newList);
 
     // Popuplate our list of terms in reverse order so people see their word added
-    for(var i=terms.length-1; i >= 0; i--){
+    for(var i=terms.length-1; i >= 0; i--) {
       newList.appendChild(generateListItem (i));
     }
   }
 }
 
-function showTipBlock(show) {
+// CONDITIONAL HTML (List, Empty Block, etc.)
+
+function showEmptyListBlock(show) {
   var emptyTip = document.getElementById("empty-tip");
   if (show) {
     emptyTip.style.display = "block";
@@ -117,15 +113,15 @@ function createDeleteButton (index) {
 
   // Add our removal event
   deleteBtn.addEventListener('click', function() {
-    removeTerm(deleteBtn);
+    removeTermFromList(deleteBtn);
   });
 
   return deleteBtn;
 }
 
-function addTermEnter () {
+function addTermToListEnter () {
   if (event.keyCode == 13) {
-    addTerm ();
+    addTermToList ();
   }
   if (document.querySelector('#spoiler-textfield').value.length == 0) {
     document.querySelector('#add-btn').disabled = true;
@@ -134,83 +130,124 @@ function addTermEnter () {
   }
 }
 
-// SHOW POP-OVER
-function showPopOver() {
+// POP-OVER HELP
+
+function clickHelpPopoverIcon() {
+  var tintedBackground = document.querySelector('#help-popover-background');
+  tintedBackground.addEventListener('click', closePopOver);
+  document.querySelector('#snooze-btn').addEventListener('click', closePopOver);
+  tintedBackground.style.display = "block";
 	document.getElementById("help-popover").style.display = "block";
-  document.getElementById("help-popover-background").style.display = "block";
-  document.querySelector(".onoffContainer").style.display = "none";
 }
 
-// CLOSE POP-OVER
 function closePopOver(divID) {
-	document.getElementById("help-popover").style.display = "none";
-  document.getElementById("help-popover-background").style.display = "none";
-  document.querySelector(".onoffContainer").style.display = "block";
+  var tintedBackground = document.querySelector('#help-popover-background');
+  tintedBackground.removeEventListener('click', closePopOver);
+  document.querySelector('#snooze-btn').removeEventListener('click', closePopOver);
+  tintedBackground.style.display = "none";
+  document.getElementById("help-popover").style.display = "none";
 }
 
-// On / Off Switch
-function clickOnOff() {
-  var isOn = document.getElementById('onoffswitch').checked;
-  // Update the browser icon
-  if (isOn) {
-    chrome.browserAction.setIcon({
-      path: "icon.png"
-    });
-  } else {
-    chrome.browserAction.setIcon({
-      path: "icon-off.png"
-    });
-  }
+// SNOOZE BEHAVIOR
 
-  // Refresh our tab to re-block or unblock content
-  storage.set({'isOn': isOn}, function() {
-    refreshOnOffViews(isOn);
-    chrome.tabs.reload();
+function displaySnoozeScreen(snoozeOn, timeToUnsnooze) {
+  if (snoozeOn) {
+    document.getElementById("snoozing-text").style.display = "block";
+    // Set the "until X:XX PM string"
+    var unsnoozeTime = new Date(timeToUnsnooze);
+    var str = "until " + stripSecondsFromTimeString(unsnoozeTime.toLocaleTimeString());
+    document.querySelector(".snooze-time-remaining").innerHTML = str;
+  } else {
+    document.querySelector(".snooze-text").style.display = "none";
+  }
+  showBackgroundTint(snoozeOn);
+  toggleSnoozeButton(!snoozeOn);
+}
+
+function stripSecondsFromTimeString (timeString) {
+  var splitTime = timeString.split(":");
+  var strippedTime = splitTime[0] + ":" + splitTime[1];
+  var strippedAMPM = splitTime[2].split(" ")[1];
+  return strippedTime + " " + strippedAMPM;
+}
+
+function showBackgroundTint(doShow) {
+  if (doShow) {
+    document.querySelector(".modal-background").style.display = "block";
+  } else {
+    document.querySelector(".modal-background").style.display = "none";
+  }
+}
+
+function clickSnooze(snoozeOn) {
+  setSnoozePrefs(snoozeOn)
+
+  // Always refresh the page. Either the user wants content hidden now
+  // (snooze) or revealed (unsnooze)
+  chrome.tabs.reload();
+}
+
+function setSnoozePrefs(snoozeOn) {
+  var timeToUnsnooze = new Date().getTime() + snoozeTime
+  storage.set({'isSnoozeOn': snoozeOn, 'timeToUnsnooze': timeToUnsnooze},
+    function() {
+      if (chrome.runtime.error) {
+        console.log("Runtime error.");
+      }
+    displaySnoozeScreen(snoozeOn, timeToUnsnooze);
   });
 }
 
-function getOnOffPreferences() {
-  storage.get('isOn', function(result) {
-    // Default isOn to true
-    if (result.isOn == null) {
-      result.isOn = true;
+function getSnoozePrefs() {
+  storage.get(['isSnoozeOn', 'timeToUnsnooze'], function(result) {
+    // Default isSnoozeOn to false
+    if (result.isSnoozeOn == null) {
+      result.isSnoozeOn = false;
     }
-    refreshOnOffViews(result.isOn);
+
+    // Display the snooze screen (or turn snooze off)
+    if (result.isSnoozeOn && isSnoozeTimeUp(result.timeToUnsnooze)) {
+      // Time is up, turn off snooze
+      setSnoozePrefs(false);
+    } else {
+      displaySnoozeScreen(result.isSnoozeOn, result.timeToUnsnooze);
+    }
   });
 }
 
-function refreshOnOffViews(isOn) {
-  if (!isOn) {
-    var spoilerList = document.getElementById("spoiler-list-container");
-    if (spoilerList) {
-      spoilerList.display = "none";
-    }
-    var blockingOff = document.getElementById("blockingOffTip");
-    blockingOff.style.display = "block";
-  } else {
-    var spoilerList = document.getElementById("spoiler-list-container");
-    if (spoilerList) {
-      spoilerList.display = "block";
-    }
-    var blockingOff = document.getElementById("blockingOffTip");
-    blockingOff.style.display = "none";
-  }
-  document.getElementById('onoffswitch').checked = isOn;
+function isSnoozeTimeUp(timeToUnsnooze) {
+  var now = new Date();
+  var isPastSnoozeTime = now.getTime() > timeToUnsnooze;
+  return isPastSnoozeTime;
 }
+
+function toggleSnoozeButton(doShow) {
+  var snoozeBtn = document.getElementById("snooze-btn");
+  var unSnoozeBtn = document.getElementById("unsnooze-btn");
+
+  if (doShow) {
+    snoozeBtn.style.display = "block";
+    unSnoozeBtn.style.display = "none";
+  } else {
+    snoozeBtn.style.display = "none";
+    unSnoozeBtn.style.display = "block";
+  }
+}
+
+// MAIN
 
 function main() {
-  getOnOffPreferences ();
   getSpoilerTerms ();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   main();
+  getSnoozePrefs();
   document.querySelector('#spoiler-textfield').focus ();
-  document.querySelector('#add-btn').addEventListener('click', addTerm);
+  document.querySelector('#add-btn').addEventListener('click', addTermToList);
   document.querySelector('#add-btn').disabled = true;
-  document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermEnter);
-  document.querySelector('#delete-all-btn').addEventListener('click', removeAllTerms);
-  document.querySelector('#help-icon').addEventListener('click', showPopOver);
-  document.querySelector('#help-popover-background').addEventListener('click', closePopOver);
-  document.querySelector('#onoffswitch').addEventListener('click', clickOnOff);
+  document.querySelector('#spoiler-textfield').addEventListener("keyup", addTermToListEnter);
+  document.querySelector('#help-icon').addEventListener('click', clickHelpPopoverIcon);
+  document.querySelector('#snooze-btn').addEventListener('click', function() { clickSnooze(true); } );
+  document.querySelector('#unsnooze-btn').addEventListener('click', function() { clickSnooze(false); });
 });
