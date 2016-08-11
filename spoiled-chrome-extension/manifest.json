@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Spoiled",
   "description": "Blocks spoiler content using any provided keywords.
   Stop spoilers, sports, or celebrity click-bait from ruining your interwebs.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "options_page": "options.html",
 
   "content_scripts": [
