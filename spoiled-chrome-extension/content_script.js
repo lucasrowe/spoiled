@@ -44,6 +44,11 @@ function replacenodesWithMatchingText (nodes, spoilerTerms, replaceString) {
   for (var i = nodes.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
       if (compareForSpoiler (nodes[i], spoilerTerms[j])) {
+        if (nodes[i].parentNode == null || nodes[i].parentNode.nodeName == "BODY") {
+          // ignore top-most node in DOM to avoid stomping entire DOM
+          // see issue #16 for more info
+          continue;
+        }
         nodes[i].className += " hidden-spoiler";
         nodes[i].textContent = replaceString;
         blurNearestChildrenImages(nodes[i]);
@@ -68,7 +73,9 @@ function blurNearestChildrenImages (nodeToCheck) {
   var iterationCount = 0;
   do {
     nextParent = nextParent.parentNode;
-    childImages = nextParent.parentNode.querySelectorAll('img');
+    if (nextParent && nextParent.nodeName != "BODY") {
+      childImages = nextParent.parentNode.querySelectorAll('img');
+    }
     iterationCount++;
   } while (nextParent && childImages.length == 0 && iterationCount < maxIterations)
 
