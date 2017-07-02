@@ -53,7 +53,7 @@ To make changes to the style, make sure to edit the .less file.
 
 ## Git Workflow
 
-I use [Git Flow](http://nvie.com/posts/a-successful-git-branching-model/) for my Git process. Feel free to fork and contribute pull requests against the develop branch. This is a side project for me but I'll do my best to review them.
+I use [GitHub Flow](https://guides.github.com/introduction/flow/) for my Git process. Feel free to fork and contribute pull requests against the master branch. This is a side project for me but I'll do my best to review them.
 
 ## Test and Deploy
 
