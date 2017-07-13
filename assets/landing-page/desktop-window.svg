@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="640pt"
+   height="550pt"
+   viewBox="0 0 800 687.49999"
+   id="svg4776"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="desktop-window.svg">
+  <defs
+     id="defs4778" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6"
+     inkscape:cx="26.805809"
+     inkscape:cy="636.37844"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="pt"
+     inkscape:window-width="1436"
+     inkscape:window-height="855"
+     inkscape:window-x="4"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4781">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-364.86225)"
+     style="display:inline">
+    <circle
+       r="3.9891026"
+       cy="377.64465"
+       cx="14.265168"
+       id="circle4209"
+       style="opacity:1;fill:#ff3b46;fill-opacity:1;stroke:none" />
+    <circle
+       r="3.9891026"
+       cy="377.95959"
+       cx="25.497641"
+       id="circle4211"
+       style="opacity:1;fill:#ffc000;fill-opacity:1;stroke:none" />
+    <circle
+       style="opacity:1;fill:#00d83f;fill-opacity:1;stroke:none"
+       id="path4207"
+       cx="36.730118"
+       cy="378.06458"
+       r="3.9891026" />
+  </g>
+</svg>

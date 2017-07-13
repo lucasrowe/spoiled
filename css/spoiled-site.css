@@ -1,3 +1,24 @@
 .blue {
   background-color: #0091EA;
 }
+
+.banner {
+  width: 60vw;
+}
+
+.tiny-logo {
+  max-width: 10vw;
+}
+
+.btn {
+  border-radius: 25px;
+}
+
+.window {
+  border-radius: 10px;
+  background-color: #f8fafb;
+}
+
+.desktop {
+  background-image: url("../assets/landing-page/desktop-window.svg");
+}

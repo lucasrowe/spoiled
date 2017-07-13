@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Fixed top navbar example for Bootstrap</title>
+    <title>Spoiled - Free Chrome Extension</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -20,35 +20,86 @@
   <body class="blue">
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <a class="navbar-brand" href="#">
-        <img class="" alt="spoiled-banner" style="width: 10vw;" src="assets/logo.svg"/>
+        <img class="tiny-logo" alt="spoiled-banner" src="assets/landing-page/logo.svg"/>
       </a>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
+      <form class="form-inline">
+        <button class="btn btn-success" type="submit">Add Spoiled to Chrome</button>
+      </form>
     </nav>
 
     <div class="container-fluid">
-      <img class="" alt="spoiled-banner" style="margin-top: 20vh; width: 60vw; margin-left: 18vw;" src="assets/logo.svg"/>
+
+      <!-- Banner -->
+      <div class="row justify-content-center" style="margin-top: 25vh;">
+        <div class="col-12 text-center">
+          <img class="img-fluid banner" alt="spoiled banner" src="assets/landing-page/logo.svg"/>
+        </div>
+        <div class="col-10 text-center">
+          <h2 class="subtitle">A free and open source spoiler blocker.
+          <br/>No ads. No tracking.</h2>
+        </div>
+        <div class="col-3 text-center">
+          <form class="form-inline mt-2 mt-md-0">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Add Spoiled to Chrome</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- First Gif -->
+      <div class="row">
+        <div class="col-8">
+          <div class="window desktop">
+            <img class="img-fluid" alt="spoiled content gif" style="padding: 25px" src="assets/spoiled.gif"/>
+          </div>
+        </div>
+        <div class="col-8">
+          <p>Spoiled covers up all text and images containing terms you provide.</p>
+        </div>
+      </div>
+
+      <!-- Second Promo -->
+      <div class="row">
+        <div class="col-4">
+          <div class="window">
+            <img class="img-fluid" alt="spoiled extension gif" style="padding: 10px" src="assets/spoiled-popup.gif"/>
+          </div>
+        </div>
+        <div class="col-8">
+          <h3>Block Anything</h3>
+          <p>Type any phrase to block it from websites you browse. You aren't
+            limited by specific shows or presents. Spoiled was designed to make
+            adding and removing phrases as fast and easy as possible.</p>
+        </div>
+      </div>
+
+      <!-- Final Promo -->
+      <div class="row">
+        <div class="col-7">
+          <h3>Free and Open Source</h3>
+          <p>I created Spoiled because I didn't trust that other blockers were
+          handling my data with care. Many even ask for social network feed access.
+          I thought making a quick little spoiler blocker would be a fun side project
+          that maybe others would use as well. All the code is open source and we
+          use no analytics of any kind so we have no access to the terms you enter
+          or the sites you browse.</p>
+        </div>
+        <div class="col-5">
+          <div class="">
+            <img class="img-fluid" alt="spoiled extension gif" style="padding: 10px" src="assets/landing-page/Octocat.png"/>
+          </div>
+        </div>
+      </div>
+
     </div>
 
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <img class="img-fluid tiny-logo" alt="spoiled banner" src="assets/landing-page/logo.svg"/>
+        <p>Made with [HEART] in Durham, NC</p>
+      </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
