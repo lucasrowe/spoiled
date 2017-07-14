@@ -1,5 +1,28 @@
+p {
+  line-height: 175%;
+  font-size: 18px;
+}
+
 .blue {
-  background-color: #0091EA;
+  background-color: #0288d1;
+}
+
+.light-blue {
+  background-color: #51baf3;
+}
+
+.lighter-blue {
+  background-color: #daeeff;
+}
+
+.grey {
+  background-color: #f4f5f7;
+}
+
+.row {
+  padding-top: 5vh;
+  padding-bottom: 15vh;
+  margin-bottom: 10vh;
 }
 
 .banner {
@@ -7,7 +30,7 @@
 }
 
 .tiny-logo {
-  max-width: 10vw;
+  max-width: 125px;
 }
 
 .btn {
@@ -21,4 +44,13 @@
 
 .desktop {
   background-image: url("../assets/landing-page/desktop-window.svg");
+}
+
+.skew {
+  height: 20vh;
+  margin-top: -20vh;
+  margin-bottom: -10vh;
+  transform:skew(0deg,-5deg);
+  -ms-transform:skew(0deg,-10deg);
+  -webkit-transform:skew(0deg,-5deg);
 }
