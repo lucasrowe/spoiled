@@ -3,6 +3,12 @@ p {
   font-size: 18px;
 }
 
+.subtitle {
+  font-size: 1.8em;
+  font-weight: bold;
+  padding: 30px;
+}
+
 .blue {
   background-color: #0288d1;
 }
@@ -17,6 +23,10 @@ p {
 
 .grey {
   background-color: #f4f5f7;
+}
+
+.off-white {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .row {
@@ -34,7 +44,11 @@ p {
 }
 
 .btn {
-  border-radius: 25px;
+  border-radius: 50px;
+  padding: 22px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
 }
 
 .window {
