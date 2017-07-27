@@ -1,13 +1,26 @@
-p {
-  line-height: 175%;
+/* =============== TYPOGRAPHY =============== */
+
+html {
   font-size: 18px;
 }
 
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+p {
+  line-height: 175%;
+}
+
 .subtitle {
-  font-size: 1.8em;
+  font-size: 1.4em;
   font-weight: bold;
   padding: 30px;
 }
+
+/* =================== COLORS =============== */
 
 .blue {
   background-color: #0288d1;
@@ -29,32 +42,14 @@ p {
   color: rgba(0, 0, 0, 0.5);
 }
 
+/* =================== LAYOUT =============== */
+
 .row {
   padding-top: 5vh;
   padding-bottom: 15vh;
   margin-bottom: 10vh;
-}
-
-.banner {
-  width: 60vw;
-}
-
-.tiny-logo {
-  max-width: 125px;
-}
-
-.btn {
-  border-radius: 50px;
-  padding: 22px;
-  cursor: pointer;
-  font-size: 18px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
-}
-
-.rounded-box {
-  padding: 50px;
-  border-radius: 10px;
-  background-color: #f8fafb;
+  padding-left: 2vw;
+  padding-right: 2vw;
 }
 
 .skew {
@@ -64,4 +59,35 @@ p {
   transform:skew(0deg,-5deg);
   -ms-transform:skew(0deg,-10deg);
   -webkit-transform:skew(0deg,-5deg);
+
 }
+
+/* =================== NAVBAR ================ */
+
+/* =================== IMAGES ================ */
+
+.banner {
+  width: 60vw;
+}
+
+.tiny-logo {
+  max-width: 125px;
+}
+
+.rounded-box {
+  padding: 50px;
+  border-radius: 10px;
+  background-color: #f8fafb;
+}
+
+/* ================= INTERACTION ============== */
+
+.btn {
+  border-radius: 50px;
+  padding: 22px;
+  cursor: pointer;
+  font-size: 1.0em;
+  box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
+}
+
+/* ================= FOOTER ============== */
