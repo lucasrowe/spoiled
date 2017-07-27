@@ -51,13 +51,10 @@ p {
   box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
 }
 
-.window {
+.rounded-box {
+  padding: 50px;
   border-radius: 10px;
   background-color: #f8fafb;
-}
-
-.desktop {
-  background-image: url("../assets/landing-page/desktop-window.svg");
 }
 
 .skew {
