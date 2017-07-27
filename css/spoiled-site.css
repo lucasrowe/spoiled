@@ -42,6 +42,14 @@ p {
   color: rgba(0, 0, 0, 0.5);
 }
 
+.green {
+  color: #8bc34a;
+}
+
+.red {
+  color: #af4343;
+}
+
 /* =================== LAYOUT =============== */
 
 .row {
@@ -72,6 +80,7 @@ p {
 
 .tiny-logo {
   max-width: 125px;
+  margin: 5px;
 }
 
 .rounded-box {
