@@ -60,6 +60,10 @@ p {
   padding-right: 2vw;
 }
 
+.row:last-child {
+  margin-bottom: 0vh;
+}
+
 .skew {
   height: 20vh;
   margin-top: -20vh;
@@ -67,7 +71,6 @@ p {
   transform:skew(0deg,-5deg);
   -ms-transform:skew(0deg,-10deg);
   -webkit-transform:skew(0deg,-5deg);
-
 }
 
 /* =================== NAVBAR ================ */
@@ -100,3 +103,11 @@ p {
 }
 
 /* ================= FOOTER ============== */
+
+.footer {
+  height: 50px;
+  margin: 0px;
+  padding: 0px 0px 50px 0px;
+  text-align: center;
+  font-size: 0.8em;
+}
