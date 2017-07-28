@@ -2,6 +2,9 @@
 
 html {
   font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Serif Pro', serif;
+  font-family: sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -10,14 +13,30 @@ html {
   }
 }
 
+h2 {
+  font-size: 2.4em;
+  color: rgba(0, 0, 0, 0.75);
+}
+
 p {
   line-height: 175%;
+  font-family: sans-serif;
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .subtitle {
-  font-size: 1.4em;
-  font-weight: bold;
+  font-size: 1.5em;
+  font-weight: 600;
   padding: 30px;
+}
+
+a {
+  color: cornsilk;
+}
+
+a:hover {
+  color: khaki;
+  text-decoration: none;
 }
 
 /* =================== COLORS =============== */
@@ -39,7 +58,7 @@ p {
 }
 
 .off-white {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.90);
 }
 
 .green {
@@ -73,12 +92,26 @@ p {
   -webkit-transform:skew(0deg,-5deg);
 }
 
+.skew-left {
+  transform:skew(0deg,5deg);
+  -ms-transform:skew(0deg,10deg);
+  -webkit-transform:skew(0deg,5deg);
+}
+
 /* =================== NAVBAR ================ */
 
 /* =================== IMAGES ================ */
 
 .banner {
-  width: 60vw;
+  width: 65vw;
+  opacity: 0.90;
+  filter: alpha(opacity=90); /* For IE8 and earlier */
+}
+
+@media (max-width: 992px) {
+  .banner {
+    width: 75vw;
+  }
 }
 
 .tiny-logo {
