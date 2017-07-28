@@ -58,7 +58,7 @@ a:hover {
 }
 
 .off-white {
-  color: rgba(255, 255, 255, 0.90);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .green {
@@ -100,12 +100,16 @@ a:hover {
 
 /* =================== NAVBAR ================ */
 
+.hidden {
+  visibility: hidden;
+}
+
 /* =================== IMAGES ================ */
 
 .banner {
   width: 65vw;
-  opacity: 0.90;
-  filter: alpha(opacity=90); /* For IE8 and earlier */
+  opacity: 0.92;
+  filter: alpha(opacity=92); /* For IE8 and earlier */
 }
 
 @media (max-width: 992px) {
@@ -128,11 +132,25 @@ a:hover {
 /* ================= INTERACTION ============== */
 
 .btn {
+  background-color: #8bc34a;
   border-radius: 50px;
   padding: 22px;
   cursor: pointer;
   font-size: 1.0em;
   box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
+}
+
+a.btn {
+  color: ghostwhite;
+}
+
+a.btn:hover {
+  color: white;
+}
+
+.btn:hover {
+  box-shadow: 0 0 7px rgba(0,0,0,0.14), 0 7px 10px rgba(0,0,0,0.28);
+  background-color: #a5cb4e;  /* fallback for old browsers */
 }
 
 /* ================= FOOTER ============== */
@@ -143,4 +161,110 @@ a:hover {
   padding: 0px 0px 50px 0px;
   text-align: center;
   font-size: 0.8em;
+}
+
+/* ================= ANIMATIONS =============== */
+/* From: https://fabriceleven.com/dev/quickly-add-css-fade-in-animations/
+
+/*=== Trigger  ===*/
+.animate {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+/*=== Animations start here  ===*/
+/*=== FADE IN  ===*/
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+
+/*=== FADE IN DOWN ===*/
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  animation-duration: 0.25s;
+}
+
+/*=== FADE OUT UP ===*/
+@-webkit-keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.fadeOutUp {
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
+  animation-duration: 0.25s;
 }
