@@ -4,7 +4,7 @@ var containerElements = "span, div, li, th, td, dt, dd";
 
 // Every time a page is loaded, check our spoil terms and block,
 // after making sure settings allow blocking on this page.
-chrome.storage.sync.get(null, function(result) {
+chrome.storage.sync.get(null, function (result) {
   // Don't manipulate page if blocking is snoozed
   if (result.isSnoozeOn && !isSnoozeTimeUp(result.timeToUnsnooze)) {
     return;
@@ -14,10 +14,10 @@ chrome.storage.sync.get(null, function(result) {
     return;
   }
 
-  enableMutationObserver ();
+  enableMutationObserver();
 
   cachedTerms = result.spoilerterms;
-  blockSpoilerContent (document, result.spoilerterms, "[text replaced by Spoiled]");
+  blockSpoilerContent(document, result.spoilerterms, "[text replaced by Spoiled]");
 });
 
 // This is a duplicate method. I don't know how to have utility scripts shared
@@ -28,22 +28,22 @@ function isSnoozeTimeUp(timeToUnsnooze) {
   return isPastSnoozeTime;
 }
 
-function blockSpoilerContent (rootNode, spoilerTerms, blockText) {
+function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
   // Search innerHTML elements first
   var nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch)
-  replacenodesWithMatchingText (nodes, spoilerTerms, blockText);
+  replacenodesWithMatchingText(nodes, spoilerTerms, blockText);
 
   // Now find any container elements that have just text inside them
-  nodes = findContainersWithTextInside (rootNode);
+  nodes = findContainersWithTextInside(rootNode);
   if (nodes && nodes.length != 0) {
-    replacenodesWithMatchingText (nodes, spoilerTerms, blockText);
+    replacenodesWithMatchingText(nodes, spoilerTerms, blockText);
   }
 }
 
-function replacenodesWithMatchingText (nodes, spoilerTerms, replaceString) {
+function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
   for (var i = nodes.length; i--;) {
     for (var j = 0; j < spoilerTerms.length; j++) {
-      if (compareForSpoiler (nodes[i], spoilerTerms[j])) {
+      if (compareForSpoiler(nodes[i], spoilerTerms[j])) {
         if (nodes[i].parentNode == null || nodes[i].parentNode.nodeName == "BODY") {
           // ignore top-most node in DOM to avoid stomping entire DOM
           // see issue #16 for more info
@@ -57,12 +57,12 @@ function replacenodesWithMatchingText (nodes, spoilerTerms, replaceString) {
   }
 }
 
-function compareForSpoiler (nodeToCheck, spoilerTerm) {
+function compareForSpoiler(nodeToCheck, spoilerTerm) {
   var regex = new RegExp(spoilerTerm, "i");
-  return regex.test (nodeToCheck.textContent);
+  return regex.test(nodeToCheck.textContent);
 }
 
-function blurNearestChildrenImages (nodeToCheck) {
+function blurNearestChildrenImages(nodeToCheck) {
   // Traverse up a level and look for images, keep going until either
   // an image is found or the top of the DOM is reached.
   // This has a known side effect of blurring ALL images on the page
@@ -87,7 +87,7 @@ function blurNearestChildrenImages (nodeToCheck) {
   }
 }
 
-function findContainersWithTextInside (targetNode) {
+function findContainersWithTextInside(targetNode) {
   var containerNodes = targetNode.querySelectorAll(containerElements);
   var emptyNodes = [];
   for (var i = 0; i < containerNodes.length; i++) {
@@ -101,12 +101,12 @@ function findContainersWithTextInside (targetNode) {
   return emptyNodes;
 }
 
-function applyBlurCSSToMatchingImages (nodes, spoilerTerms) {
+function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
   for (var i = 0; i < nodes.length; i++) {
     for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
       var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
-      if (regex.test (nodes[i].title) || regex.test (nodes[i].alt ||
-      regex.test (nodes[i].src) || regex.test (nodes[i].name))) {
+      if (regex.test(nodes[i].title) || regex.test(nodes[i].alt ||
+        regex.test(nodes[i].src) || regex.test(nodes[i].name))) {
         nodes[i].className += " blurred";
         nodes[i].parentNode.style.overflow = "hidden";
       }
@@ -114,19 +114,19 @@ function applyBlurCSSToMatchingImages (nodes, spoilerTerms) {
   }
 }
 
-function enableMutationObserver () {
+function enableMutationObserver() {
   // Detecting changed content using Mutation Observers
   //
   // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver?redirectlocale=en-US&redirectslug=DOM%2FMutationObserver
   // https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-  var observer = new MutationObserver(function(mutations, observer) {
-      // fired when a mutation occurs
-      // console.log(mutations, observer);
-      for (var i = 0; i < mutations.length; i++) {
-        blockSpoilerContent(mutations[i].target, cachedTerms, "[text overridden by Spoiled]");
-      }
+  var observer = new MutationObserver(function (mutations, observer) {
+    // fired when a mutation occurs
+    // console.log(mutations, observer);
+    for (var i = 0; i < mutations.length; i++) {
+      blockSpoilerContent(mutations[i].target, cachedTerms, "[text overridden by Spoiled]");
+    }
   });
 
   // configuration of the observer:
