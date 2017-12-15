@@ -35,7 +35,7 @@ function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
 
   // Now find any container elements that have just text inside them
   nodes = findContainersWithTextInside(rootNode);
-  if (nodes && nodes.length != 0) {
+  if (nodes && nodes.length !== 0) {
     replacenodesWithMatchingText(nodes, spoilerTerms, blockText);
   }
 }
@@ -44,7 +44,7 @@ function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
   for (const node of nodes) {
     for (const spoilerTerm of spoilerTerms) {
       if (compareForSpoiler(node, spoilerTerm)) {
-        if (node.parentNode == null || node.parentNode.nodeName == "BODY") {
+        if (!node.parentNode || node.parentNode.nodeName === "BODY") {
           // ignore top-most node in DOM to avoid stomping entire DOM
           // see issue #16 for more info
           continue;
@@ -73,11 +73,11 @@ function blurNearestChildrenImages(nodeToCheck) {
   let iterationCount = 0;
   do {
     nextParent = nextParent.parentNode;
-    if (nextParent && nextParent.nodeName != "BODY") {
+    if (nextParent && nextParent.nodeName !== "BODY") {
       childImages = nextParent.parentNode.querySelectorAll('img');
     }
     iterationCount++;
-  } while (nextParent && childImages.length == 0 && iterationCount < maxIterations)
+  } while (nextParent && childImages.length === 0 && iterationCount < maxIterations)
 
   // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
