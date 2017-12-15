@@ -4,7 +4,7 @@ var containerElements = "span, div, li, th, td, dt, dd";
 
 // Every time a page is loaded, check our spoil terms and block,
 // after making sure settings allow blocking on this page.
-chrome.storage.sync.get(null, function (result) {
+chrome.storage.sync.get(null, (result) => {
   // Don't manipulate page if blocking is snoozed
   if (result.isSnoozeOn && !isSnoozeTimeUp(result.timeToUnsnooze)) {
     return;
@@ -41,17 +41,17 @@ function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
 }
 
 function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
-  for (var i = nodes.length; i--;) {
-    for (var j = 0; j < spoilerTerms.length; j++) {
-      if (compareForSpoiler(nodes[i], spoilerTerms[j])) {
-        if (nodes[i].parentNode == null || nodes[i].parentNode.nodeName == "BODY") {
+  for (const node of nodes) {
+    for (const spoilerTerm of spoilerTerms) {
+      if (compareForSpoiler(node, spoilerTerm)) {
+        if (node.parentNode == null || node.parentNode.nodeName == "BODY") {
           // ignore top-most node in DOM to avoid stomping entire DOM
           // see issue #16 for more info
           continue;
         }
-        nodes[i].className += " hidden-spoiler";
-        nodes[i].textContent = replaceString;
-        blurNearestChildrenImages(nodes[i]);
+        node.className += " hidden-spoiler";
+        node.textContent = replaceString;
+        blurNearestChildrenImages(node);
       }
     }
   }
@@ -81,8 +81,8 @@ function blurNearestChildrenImages(nodeToCheck) {
 
   // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
-    for (var imageIndex = 0; imageIndex < childImages.length; imageIndex++) {
-      childImages[imageIndex].className += " blacked-out";
+    for (const image of childImages) {
+      image.className += " blacked-out";
     }
   }
 }
@@ -90,11 +90,11 @@ function blurNearestChildrenImages(nodeToCheck) {
 function findContainersWithTextInside(targetNode) {
   var containerNodes = targetNode.querySelectorAll(containerElements);
   var emptyNodes = [];
-  for (var i = 0; i < containerNodes.length; i++) {
-    var containerChildren = containerNodes[i].childNodes;
-    for (var childIndex = 0; childIndex < containerChildren.length; childIndex++) {
-      if (containerChildren[childIndex].textContent) {
-        emptyNodes.push(containerChildren[childIndex].parentNode);
+  for (const containerNode of containerNodes) {
+    var containerChildren = containerNode.childNodes;
+    for (const containerChild of containerChildren) {
+      if (containerChild.textContent) {
+        emptyNodes.push(containerChild.parentNode);
       }
     }
   }
@@ -102,13 +102,13 @@ function findContainersWithTextInside(targetNode) {
 }
 
 function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
-  for (var i = 0; i < nodes.length; i++) {
-    for (var spoilerIndex = 0; spoilerIndex < spoilerTerms.length; spoilerIndex++) {
-      var regex = new RegExp(spoilerTerms[spoilerIndex], "i");
-      if (regex.test(nodes[i].title) || regex.test(nodes[i].alt ||
-        regex.test(nodes[i].src) || regex.test(nodes[i].name))) {
-        nodes[i].className += " blurred";
-        nodes[i].parentNode.style.overflow = "hidden";
+  for (const node of nodes) {
+    for (const spoilerTerm of spoilerTerms) {
+      var regex = new RegExp(spoilerTerm, "i");
+      if (regex.test(node.title) || regex.test(node.alt ||
+        regex.test(node.src) || regex.test(node.name))) {
+        node.className += " blurred";
+        node.parentNode.style.overflow = "hidden";
       }
     }
   }
@@ -121,11 +121,11 @@ function enableMutationObserver() {
   // https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-  var observer = new MutationObserver(function (mutations, observer) {
+  var observer = new MutationObserver((mutations, observer) => {
     // fired when a mutation occurs
     // console.log(mutations, observer);
-    for (var i = 0; i < mutations.length; i++) {
-      blockSpoilerContent(mutations[i].target, cachedTerms, "[text overridden by Spoiled]");
+    for (const mutation of mutations) {
+      blockSpoilerContent(mutation.target, cachedTerms, "[text overridden by Spoiled]");
     }
   });
 
