@@ -41,6 +41,8 @@ function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
 }
 
 function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
+  nodes = Array.from(nodes);
+  nodes.reverse();
   for (const node of nodes) {
     for (const spoilerTerm of spoilerTerms) {
       if (compareForSpoiler(node, spoilerTerm)) {
