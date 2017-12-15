@@ -1,6 +1,6 @@
-var cachedTerms = [];
-var elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
-var containerElements = "span, div, li, th, td, dt, dd";
+let cachedTerms = [];
+const elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
+const containerElements = "span, div, li, th, td, dt, dd";
 
 // Every time a page is loaded, check our spoil terms and block,
 // after making sure settings allow blocking on this page.
@@ -23,14 +23,14 @@ chrome.storage.sync.get(null, (result) => {
 // This is a duplicate method. I don't know how to have utility scripts shared
 // by both the content script and the popup script.
 function isSnoozeTimeUp(timeToUnsnooze) {
-  var now = new Date();
-  var isPastSnoozeTime = now.getTime() > timeToUnsnooze;
+  const now = new Date();
+  const isPastSnoozeTime = now.getTime() > timeToUnsnooze;
   return isPastSnoozeTime;
 }
 
 function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
   // Search innerHTML elements first
-  var nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch)
+  let nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch)
   replacenodesWithMatchingText(nodes, spoilerTerms, blockText);
 
   // Now find any container elements that have just text inside them
@@ -58,7 +58,7 @@ function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
 }
 
 function compareForSpoiler(nodeToCheck, spoilerTerm) {
-  var regex = new RegExp(spoilerTerm, "i");
+  const regex = new RegExp(spoilerTerm, "i");
   return regex.test(nodeToCheck.textContent);
 }
 
@@ -67,10 +67,10 @@ function blurNearestChildrenImages(nodeToCheck) {
   // an image is found or the top of the DOM is reached.
   // This has a known side effect of blurring ALL images on the page
   // if an early spoiler is found, but ideally will catch the nearest images
-  var nextParent = nodeToCheck;
-  var childImages;
-  var maxIterations = 3;
-  var iterationCount = 0;
+  let nextParent = nodeToCheck;
+  let childImages;
+  const maxIterations = 3;
+  let iterationCount = 0;
   do {
     nextParent = nextParent.parentNode;
     if (nextParent && nextParent.nodeName != "BODY") {
@@ -88,10 +88,10 @@ function blurNearestChildrenImages(nodeToCheck) {
 }
 
 function findContainersWithTextInside(targetNode) {
-  var containerNodes = targetNode.querySelectorAll(containerElements);
-  var emptyNodes = [];
+  const containerNodes = targetNode.querySelectorAll(containerElements);
+  const emptyNodes = [];
   for (const containerNode of containerNodes) {
-    var containerChildren = containerNode.childNodes;
+    const containerChildren = containerNode.childNodes;
     for (const containerChild of containerChildren) {
       if (containerChild.textContent) {
         emptyNodes.push(containerChild.parentNode);
@@ -104,7 +104,7 @@ function findContainersWithTextInside(targetNode) {
 function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
   for (const node of nodes) {
     for (const spoilerTerm of spoilerTerms) {
-      var regex = new RegExp(spoilerTerm, "i");
+      const regex = new RegExp(spoilerTerm, "i");
       if (regex.test(node.title) || regex.test(node.alt ||
         regex.test(node.src) || regex.test(node.name))) {
         node.className += " blurred";
@@ -121,7 +121,7 @@ function enableMutationObserver() {
   // https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-  var observer = new MutationObserver((mutations, observer) => {
+  const observer = new MutationObserver((mutations, observer) => {
     // fired when a mutation occurs
     // console.log(mutations, observer);
     for (const mutation of mutations) {
@@ -130,7 +130,7 @@ function enableMutationObserver() {
   });
 
   // configuration of the observer:
-  var config = { attributes: true, subtree: true }
+  const config = { attributes: true, subtree: true }
   // turn on the observer...unfortunately we target the entire document
   observer.observe(document, config);
   // disconnecting likely won't work since we need to continuously watch
