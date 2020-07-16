@@ -62,3 +62,12 @@ You can test by loading the unpacked extension in developer mode of [chrome://ex
 To promote to production, just tick up the version in the manifest, zip up the **spoiled-chrome-extension** directory, and upload it to the [Chrome developer dashboard](https://chrome.google.com/webstore/developer/).
 
     zip -r spoiled.zip ./spoiled-chrome-extension/*
+
+## Landing Page
+
+The Spoiled landing page is
+https://lucasrowe.github.io/spoiled/.
+
+I've been editing the page without testing locally so there is no gemfile.
+
+Be sure to switch to the gh-pages branch: `git checkout gh-pages`
